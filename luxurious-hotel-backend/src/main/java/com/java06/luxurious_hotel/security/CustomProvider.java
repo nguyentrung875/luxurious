@@ -47,12 +47,12 @@ public class CustomProvider implements AuthenticationProvider {
 //        authorityDTO.setLastName(userEntity.getLastName());
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority(userEntity.getRole().getName()));
+        authorityList.add(new SimpleGrantedAuthority(userEntity.getRole().getName()+" "+userEntity.getEmail()+" "+"http://localhost:9999/file/"+userEntity.getImage()));
         return new UsernamePasswordAuthenticationToken("", "", authorityList);
     }
 
     @Override
-    public boolean supports(Class<?> authentication) {
+    public boolean supports(Class<?> authentication) {// xác định loại authen là user name password
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }

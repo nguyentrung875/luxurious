@@ -1,64 +1,152 @@
-$(document).ready( function(){
+// var token = localStorage.getItem('jwt');
+// $(document).ready( function(){
+    
+//     $.ajax({
+//         url: "http://localhost:9999/roomType",
+//         method: "GET",
+//         contentType: "application/json",
+//         headers: {
+//             "Authorization": "Bearer " + token  // Truyền token vào header
+//         }
+//     }).done(function( response ) {
+
+//         if(response.statusCode===401){
+//             alert('khong dc phan quyen')
+//             window.location.href = "401-author-page.html"
+
+//         }
+//           if(response.data){
+//             var html=""
+            
+//             for(i=0;i<response.data.length;i++){
+//                 var item = response.data[i];
+//                     var ruoomNum=""
+
+//                 if(item.roomName && item.roomName.length >0){
+//                     for(j=0; j< item.roomName.length;j++){
+//                         ruoomNum += item.roomName[j];
+//                         if(j<item.roomName.length-1){
+//                             ruoomNum += ", "
+//                         }
+//                     }
+//                 }else{
+//                     ruoomNum="No Rooms Available"
+//                 }
+
+//                 html+= `													<tr>
+// 														<td class="token">${item.name}</td>
+// 														<td><img class="cat-thumb" src="${item.image[0]}"
+// 																alt="clients Image"><span class="name">${item.overview}</span>
+// 														</td>
+// 														<td>$${item.price}</td>
+// 														<td>${item.area}m2</td>
+// 														<td>${item.capacity}</td>
+// 														<td>${item.bedName}</td>
+//                                                         <td>${ruoomNum}</td>
+														
+														
+														
+// 														<td>
+// 															<div class="d-flex justify-content-center">
+// 																<!-- <button type="button" class="btn btn-outline-success"><i
+// 																		class="ri-information-line"></i></button> -->
+// 																<button type="button"
+// 																	class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+// 																	data-bs-toggle="dropdown" aria-haspopup="true"
+// 																	aria-expanded="false" data-display="static">
+// 																	<span class="sr-only"><i
+// 																			class="ri-settings-3-line"></i></span>
+// 																</button>
+// 																<div class="dropdown-menu">
+// 																	<span class="dropdown-item edit-btn" href="#" data-id="${item.id}">Edit</span>
+// 																	<span class="dropdown-item delete-btn" href="#" data-id="${item.id}">Delete</span>
+// 																</div>
+// 															</div>
+// 														</td>
+// 													</tr>`
+//             }
+//             $('#list-roomtype').append(html)
+//           }
+//     });
+// })
+
+
+
+
+
+
+
+var token = localStorage.getItem('jwt');
+
+$(document).ready(function () {
     $.ajax({
         url: "http://localhost:9999/roomType",
         method: "GET",
         contentType: "application/json",
-        
-    }).done(function( response ) {
-          if(response.data){
-            var html=""
-            
-            for(i=0;i<response.data.length;i++){
-                var item = response.data[i];
-                    var ruoomNum=""
+        headers: {
+            "Authorization": "Bearer " + token   
+        }
+    }).done(function (response) {
+         if (response.data) {
+            var html = "";
 
-                if(item.roomName && item.roomName.length >0){
-                    for(j=0; j< item.roomName.length;j++){
+            for (i = 0; i < response.data.length; i++) {
+                var item = response.data[i];
+                var ruoomNum = "";
+
+                if (item.roomName && item.roomName.length > 0) {
+                    for (j = 0; j < item.roomName.length; j++) {
                         ruoomNum += item.roomName[j];
-                        if(j<item.roomName.length-1){
-                            ruoomNum += ", "
+                        if (j < item.roomName.length - 1) {
+                            ruoomNum += ", ";
                         }
                     }
-                }else{
-                    ruoomNum="No Rooms Available"
+                } else {
+                    ruoomNum = "No Rooms Available";
                 }
 
-                html+= `													<tr>
-														<td class="token">${item.name}</td>
-														<td><img class="cat-thumb" src="${item.image[0]}"
-																alt="clients Image"><span class="name">${item.overview}</span>
-														</td>
-														<td>$${item.price}</td>
-														<td>${item.area}m2</td>
-														<td>${item.capacity}</td>
-														<td>${item.bedName}</td>
-                                                        <td>${ruoomNum}</td>
-														
-														
-														
-														<td>
-															<div class="d-flex justify-content-center">
-																<!-- <button type="button" class="btn btn-outline-success"><i
-																		class="ri-information-line"></i></button> -->
-																<button type="button"
-																	class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-																	data-bs-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false" data-display="static">
-																	<span class="sr-only"><i
-																			class="ri-settings-3-line"></i></span>
-																</button>
-																<div class="dropdown-menu">
-																	<span class="dropdown-item edit-btn" href="#" data-id="${item.id}">Edit</span>
-																	<span class="dropdown-item delete-btn" href="#" data-id="${item.id}">Delete</span>
-																</div>
-															</div>
-														</td>
-													</tr>`
+                html += `<tr>
+                            <td class="token">${item.name}</td>
+                            <td><img class="cat-thumb" src="${item.image[0]}" alt="clients Image">
+                                <span class="name">${item.overview}</span>
+                            </td>
+                            <td>$${item.price}</td>
+                            <td>${item.area}m2</td>
+                            <td>${item.capacity}</td>
+                            <td>${item.bedName}</td>
+                            <td>${ruoomNum}</td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <button type="button"
+                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        data-display="static">
+                                        <span class="sr-only"><i class="ri-settings-3-line"></i></span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <span class="dropdown-item edit-btn" href="#" data-id="${item.id}">Edit</span>
+                                        <span class="dropdown-item delete-btn" href="#" data-id="${item.id}">Delete</span>
+                                        <a class="dropdown-item" href="room-list.html">Add Room</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>`;
             }
-            $('#list-roomtype').append(html)
-          }
+            $('#list-roomtype').append(html);
+        }
+    }).fail(function (jqXHR) {
+        // Xử lý lỗi khi mã trạng thái là 401 (Unauthorized)
+        if (jqXHR.statusCode === 401) {
+            //alert('Bạn không có quyền truy cập vào trang này.');
+            // window.location.href = "401-author-page.html";  
+            // localStorage.setItem('redirectUrl', window.location.href); 
+        } else {
+            // window.location.href = "401-author-page.html";      
+            // localStorage.setItem('redirectUrl', window.location.href);   
+            }
     });
-})
+});
+
 
 //<td>${item.amenity}</td>
 
@@ -79,6 +167,9 @@ $(document).ready(function() {
                 url: "http://localhost:9999/roomType/" + roomId, 
                 method: "DELETE",
                 contentType: "application/json",
+                headers: {
+                    "Authorization": "Bearer " + token   
+                },
                 success: function(response) {
                     if(response.statusCode == 200) {
                         
@@ -143,9 +234,12 @@ $(document).ready(function() {
 
     if (roomId) {
         $.ajax({
-            url: "http://localhost:9999/roomType/" + roomId,
+            url: "http://localhost:9999/roomType/detail/" + roomId,
             method: "GET",
             contentType: "application/json",
+            headers: {
+                "Authorization": "Bearer " + token   
+            },
             success: function(response) {
                 if (response.statusCode === 200) {
                     var room = response.data;
@@ -284,7 +378,10 @@ $(document).ready(function() {
             method: "PUT",
             data: formData,
             processData: false,  
-            contentType: false,  
+            contentType: false,
+            headers: {
+                "Authorization": "Bearer " + token   
+            },
             success: function(response) {
                 if (response.statusCode === 200) {
                     alert('Room type updated successfully!');

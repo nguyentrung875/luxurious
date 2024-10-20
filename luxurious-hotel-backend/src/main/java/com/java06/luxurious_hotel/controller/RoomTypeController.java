@@ -53,7 +53,7 @@ public class RoomTypeController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<?> getRoomTypeDetail(@PathVariable int id){
 
         RoomTypeDTO roomTypeDTO = roomTypeService.findRoomTypeById(id);
