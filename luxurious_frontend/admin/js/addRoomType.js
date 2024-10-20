@@ -1,3 +1,5 @@
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function() {
     $('#addRoomTypeForm').on('submit', function(event) {
         event.preventDefault();  
@@ -11,6 +13,9 @@ $(document).ready(function() {
             url: "http://localhost:9999/roomType",  
             method: "POST",
             data: formData,
+            headers: {
+                "Authorization": "Bearer " + token  // Truyền token vào header
+            },
             processData: false,  
             contentType: false,  
             success: function(response) {
