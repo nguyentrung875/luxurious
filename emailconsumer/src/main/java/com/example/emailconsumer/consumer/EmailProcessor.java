@@ -38,7 +38,7 @@ public class EmailProcessor {
         try {
             emailService.sendConfirmBookingEmail(data);
         } catch (Exception e){
-            log.error("Error send Confirm Email: " + e.getMessage());
+            log.error("Error send confirm Email: " + e.getMessage());
         }
     }
 
@@ -47,7 +47,7 @@ public class EmailProcessor {
         try {
             emailService.sendSuccessBookingEmail(data);
         } catch (Exception e){
-            log.error("Error send Confirm Email: " + e.getMessage());
+            log.error("Error send successful Email: " + e.getMessage());
         }
     }
 }

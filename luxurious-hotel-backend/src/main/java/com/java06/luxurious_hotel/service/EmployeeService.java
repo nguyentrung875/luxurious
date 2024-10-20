@@ -11,6 +11,7 @@ import java.util.Map;
 
 @Service
 public interface EmployeeService {
+    EmployeeDTO getMyInfo();
     void addEmployee(AddEmployeeRequest addEmployeeRequest);
     Boolean updateEmployee(UpdateEmployeeRequest updateEmployeeRequest);
     Boolean deleteEmployee(int employeeId);

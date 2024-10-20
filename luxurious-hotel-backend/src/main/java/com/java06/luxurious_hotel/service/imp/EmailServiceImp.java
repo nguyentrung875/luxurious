@@ -1,5 +1,8 @@
 package com.java06.luxurious_hotel.service.imp;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.java06.luxurious_hotel.config.RabbitmqConfig;
+import com.java06.luxurious_hotel.dto.BookingDTO;
 import com.java06.luxurious_hotel.entity.BookingEntity;
 import com.java06.luxurious_hotel.entity.RoomBookingEntity;
 import com.java06.luxurious_hotel.exception.booking.BookingNotFoundException;
@@ -11,6 +14,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -31,6 +35,12 @@ public class EmailServiceImp implements EmailService {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private final JavaMailSender mailSender;
 
@@ -163,6 +173,31 @@ public class EmailServiceImp implements EmailService {
         mailSender.send(message);
 
         return "Confirmation email has been sent to " + booking.getGuest().getEmail();
+    }
+
+    @Override
+    public String sendSuccessfulBookingEmailToQueue(BookingDTO bookingDTO) {
+        try {
+            String json = objectMapper.writeValueAsString(bookingDTO);
+            rabbitTemplate.convertAndSend(
+                    RabbitmqConfig.BOOKING_EMAIL_EXCHANGE,
+                    RabbitmqConfig.SUCCESS_BOOKING_EMAIL_ROUTING_KEY,
+                    json);
+        } catch (Exception e){
+            throw new RuntimeException("Error send successful booking email to Queue: " + e );
+        }
+        return "sent successful booking to queue";
+    }
+
+    @Override
+    public String sendConfirmBookingEmailToQueue(AddBookingRequest bookingDTO) {
+        try {
+            String json = objectMapper.writeValueAsString(bookingDTO);
+            rabbitTemplate.convertAndSend(RabbitmqConfig.BOOKING_EMAIL_EXCHANGE,RabbitmqConfig.CONFIRM_BOOKING_EMAIL_ROUTING_KEY,json);
+        } catch (Exception e) {
+            throw new RuntimeException("Error send confirm booking email to Queue: " + e );
+        }
+        return "sent confirm booking to queue";
     }
 
 

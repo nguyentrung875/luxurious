@@ -47,6 +47,9 @@ public class RoleServiceImp implements RoleService {
         List <UserEntity> users = employeeReposiory.findAll();
         String imageBaseUrl = "http://localhost:9999/file/";
         for (RoleEntity data : role) {
+            if (data.getId()==1){
+                continue;
+            }
             RoleDTO dto = new RoleDTO();
             dto.setId(data.getId());
             dto.setName(data.getName());

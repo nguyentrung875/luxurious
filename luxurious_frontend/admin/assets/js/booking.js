@@ -16,7 +16,6 @@ $(document).ready(function () {
         inputBooking.checkInDate = $('#input_checkin').val();
         inputBooking.checkOutDate = $('#input_checkout').val();
         inputBooking.rooms = $('#input_rooms').val();
-        inputBooking.roomName = $('#input_rooms option:selected').toArray().map(item => item.text)
         inputBooking.adultNumber = $('#input_adult').val();
         inputBooking.childrenNumber = $('#input_children').val();
         inputBooking.idBookingStatus = $('#input_booking_status').val();
@@ -32,6 +31,8 @@ $(document).ready(function () {
             inputBooking.phone = $('#input_phone').val();
             inputBooking.email = $('#input_email').val();
             inputBooking.address = $('#input_address').val();
+            inputBooking.roomName = $('#input_rooms option:selected').toArray().map(item => item.text)
+
             addBooking(inputBooking)
         } else {
             inputBooking.idGuest = $('.guest-profile').attr('id_guest');

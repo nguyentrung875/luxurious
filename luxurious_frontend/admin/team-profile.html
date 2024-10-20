@@ -430,6 +430,40 @@
 									<li class="check"><a class="lh-primary-btn" href="#">View all</a></li>
 								</ul>
 							</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Notify sidebar -->
+		<div class="lh-notify-bar-overlay"></div>
+		<div class="lh-notify-bar">
+			<div class="lh-bar-title">
+				<h6>Notifications</h6>
+				<a href="javascript:void(0)" class="close-notify"><i class="ri-close-line"></i></a>
+			</div>
+			<div class="lh-bar-content">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="alert-tab" data-bs-toggle="tab" data-bs-target="#alert"
+							type="button" role="tab" aria-controls="alert" aria-selected="true">Alert</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"
+							type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+					</li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="alert" role="tabpanel" aria-labelledby="alert-tab">
+						<div class="lh-alert-list">
+							<ul id="notification__content">
+
+							</ul>
+							<ul>
+								<li class="check view__more"><a class="lh-primary-btn" href="#">View more</a></li>
+
+							</ul>
+
 						</div>
 						<div class="tab-pane fade" id="messages" role="tabpanel"
 							aria-labelledby="messages-tab">
@@ -776,7 +810,7 @@
 			</div>
 		</main>
 
-		<!-- Vendor Custom -->
+ 		<!-- Vendor Custom -->
 		<script src="assets/js/vendor/jquery-3.6.4.min.js"></script>
 		<script src="assets/js/vendor/simplebar.min.js"></script>
 		<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
@@ -793,12 +827,23 @@
 		<script src="assets/js/vendor/moment.min.js"></script>
 		<script src="assets/js/vendor/daterangepicker.js"></script>
 		<script src="assets/js/vendor/date-range.js"></script>
+ 
+	<!-- Main Custom -->
+	<script src="assets/js/main.js"></script>
+	<script src="js/singel-employee.js"></script>
+      <script src="js/authorAdmin.js"></script>
 
+	<!-- Notification websocket -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script src="assets/js/notifications.js"></script>
+</body>
+ 
 		<!-- Main Custom -->
-		<script src="assets/js/main.js"></script>
+<!-- 		<script src="assets/js/main.js"></script>
 		<script src="js/singel-employee.js"></script>
 		<script src="js/authorAdmin.js"></script>
-	</body>
+	</body> -->
 
 	<!-- Mirrored from maraviyainfotech.com/projects/luxurious-html-v22/admin/team-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Aug 2024 09:24:35 GMT -->
 </html>

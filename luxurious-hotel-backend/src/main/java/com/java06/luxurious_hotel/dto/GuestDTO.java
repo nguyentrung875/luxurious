@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GuestDTO {
     private int id;
+    private String username;
     private String fullName;
     private String phone;
     private String email;
@@ -17,4 +18,5 @@ public class GuestDTO {
     private LocalDate dob;
     private String firstName;
     private String lastName;
+    private String linkImage;
 }

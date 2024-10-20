@@ -10,6 +10,7 @@ public record UpdateEmployeeRequest (int id,
                                      @NotNull(message = "First Name cannot be null")
                                      @Pattern(regexp = "^[a-zA-ZÀ-ỹ\\s]+$", message = "name must contain only letters and spaces")
                                      String firstname,
+                                     String existingImageName,
                                      @NotNull(message = "Last Name cannot be null")
                                      @Pattern(regexp = "^[a-zA-ZÀ-ỹ\\s]+$", message = "name must contain only letters and spaces")
                                      String lastname,
@@ -24,7 +25,6 @@ public record UpdateEmployeeRequest (int id,
                                      String address,
                                      @NotNull (message = "ID Role cannot be null")
                                      int IdRole,
-                                     @NotNull (message = "image cannot be null")
                                      MultipartFile image,
                                      @NotNull (message = "summary cannot be null")
                                      String summary) {

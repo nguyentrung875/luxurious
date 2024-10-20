@@ -50,6 +50,9 @@ public class UserEntity {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "deleted", columnDefinition = "TINYINT(1)")
+    private Integer deleted;
+
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "id_role")

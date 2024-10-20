@@ -28,7 +28,7 @@ $(document).ready(function () {
         // Kiểm tra fullname (không chứa số hoặc ký tự đặc biệt)
         var nameRegex = /^[a-zA-ZÀ-ỹ\s]+$/;
         if (!fullName.match(nameRegex)) {
-            message += "Họ tên không được chứa số hoặc ký tự đặc biệt.\n";
+            message += "Họ tên không được để trống, chứa số hoặc ký tự đặc biệt.\n";
             isValid = false;
         }
 
@@ -84,11 +84,11 @@ $(document).ready(function () {
                     
                 })
             }).done(function(item){
-                if (item.statusCode === 200) {
+                if (item.statusCode === 200 && item.data === true) {
                     alert("Update thành công!");
                     window.location.href= 'guest.html';
-                } else {
-                    alert("Đã có lỗi xảy ra, vui lòng thử lại.");
+                }else if (item.statusCode === 500 && item.message === "Duplicate mail or phone number"){
+                    alert("Phone hoặc mail đã tồn tại, vui lòng kiểm tra hoặc nhập lại.");
                 }
         
             }).fail(function(jqXHR, textStatus, errorThrown) {

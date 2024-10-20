@@ -16,6 +16,42 @@ import java.util.stream.Stream;
 public class FilesStorageServiceImpl implements FilesStorageService {
 
     private final Path root = Paths.get("uploads");
+
+    private final Path root1 = Paths.get("uploads/guest");
+
+    @Override
+    public void save1(MultipartFile file) {
+        if (file != null) {
+            try {
+                if (!Files.exists(root1)) {
+                    Files.createDirectories(root1);
+                }
+
+                // Thực hiện ghi đè nếu tệp đã tồn tại trên server, tránh throw exception (tệp đã tồn tại)
+                Files.copy(file.getInputStream(), this.root1.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public Resource load1(String filename) {
+        try {
+            Path file = root1.resolve(filename);
+
+            Resource resource = new UrlResource(file.toUri());  // Biển file thành resource
+            if(resource.exists()){
+                return resource;
+            }else {
+                throw new FileNotFoundException();
+            }
+        }catch (Exception e){
+            throw new FileNotFoundException(e.getMessage());
+        }
+    }
+
     @Override
     public void save(MultipartFile file) {
         try {

@@ -11,6 +11,7 @@ $(document).ready(function () {
         var email = $('#email').val().toLowerCase()
         var address = $('#address').val()
         var summary = $('#summary').val()
+        var imageUpload = $('#imageUpload')[0].files[0]; // Lấy file từ input
 
         // Kiểm tra dữ liệu
         var isValid = true;
@@ -19,7 +20,7 @@ $(document).ready(function () {
         // Kiểm tra fullname (không chứa số hoặc ký tự đặc biệt)
         var nameRegex = /^[a-zA-ZÀ-ỹ\s]+$/;
         if (!fullName.match(nameRegex)) {
-            message += "Họ tên không được chứa số hoặc ký tự đặc biệt.\n";
+            message += "Họ tên không được để trống, chứa số hoặc ký tự đặc biệt.\n";
             isValid = false;
         }
 
@@ -31,11 +32,11 @@ $(document).ready(function () {
         }
 
         // Kiểm tra định dạng dob (yyyy-mm-dd)
-        var dobRegex = /^\d{4}-\d{2}-\d{2}$/;
-        if (!dob.match(dobRegex)) {
-            message += "Định dạng ngày sinh phải là yyyy-mm-dd.\n";
-            isValid = false;
-        }
+        // var dobRegex = /^\d{4}-\d{2}-\d{2}$/;
+        // if (!dob.match(dobRegex)) {
+        //     message += "Định dạng ngày sinh phải là yyyy-mm-dd.\n";
+        //     isValid = false;
+        // }
 
         // Kiểm tra định dạng email
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,48 +45,26 @@ $(document).ready(function () {
             isValid = false;
         }
 
-        try {
-            console.log("vohing?")
-            var checkEmail = await checkEmailExistence(email);
-            if (checkEmail === true) {
-                message += "Email đã tồn tại.\n";
-                isValid = false;
-            }
-        } catch (error) {
-            alert("Lỗi kiểm tra email: " + error);
-            return;
-        }
-
-        try {
-            var checkPhone = await checkPhoneExistence(phone);
-            if (checkPhone === true) {
-                message += "Số điện thoại đã tồn tại.\n";
-                isValid = false;
-            }
-        } catch (error) {
-            alert("Lỗi kiểm tra số điện thoại: " + error);
-            return;
-        }
-
+        
         if (!isValid) {
             alert(message);  // Hiện thông báo lỗi
         } else {
-            // Tạo một đối tượng chứa các thông tin từ form (theo đúng cấu trúc của AddGuestRequest)
-            var guestData = {
-                fullName: fullName,
-                dob: dob,
-                phone: phone,
-                email: email,
-                address: address,
-                summary: summary
-            };
-            console.log(JSON.stringify(guestData));
+            // Tạo một đối tượng FormData để gửi request
+            var formData = new FormData();
+            formData.append("fullName", fullName);
+            formData.append("dob", dob);
+            formData.append("phone", phone);
+            formData.append("email", email);
+            formData.append("address", address);
+            formData.append("summary", summary);
+            formData.append("filePicture", imageUpload);  // Đính kèm file vào formData
             
             $.ajax({
                 url: "http://localhost:9999/user/addguest",
                 method: "POST",
-                contentType:"application/json",
-                data:JSON.stringify(guestData)
+                data: formData,
+                processData: false, // Ngăn chặn jQuery xử lý dữ liệu (vì chúng ta đang sử dụng FormData)
+                contentType: false, // Để mặc định, vì chúng ta đang gửi multipart/form-data
             }).done(function(item){
                 if (item.statusCode === 200) {
                     alert("Thêm khách thành công!");
@@ -96,6 +75,8 @@ $(document).ready(function () {
                     $('#email').val('');
                     $('#address').val('');
                     $('#summary').val('');
+                }else if (item.statusCode === 500 && item.message === "duplicate mail or phone number" ) {
+                    alert("Số điện thoại hoặc email đã tồn tại.\nMời bạn nhập lại.");
                 } else {
                     alert("Đã có lỗi xảy ra, vui lòng thử lại.");
                 }
@@ -108,38 +89,6 @@ $(document).ready(function () {
         
 
     });
-
-    async function checkEmailExistence(email) {
-        let checkEmail = false;
-        await $.ajax({
-            url: "http://localhost:9999/user/checkemail?email=" + encodeURIComponent(email),
-            method: "POST",
-            contentType: "application/x-www-form-urlencoded"
-        }).done(function(item){
-            checkEmail = item.data;
-            console.log("tra ve?: "+item);
-            console.log(item.data);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.log("Lỗi kiểm tra email: " + textStatus + ": " + errorThrown);
-        });
-        return checkEmail;
-    }
-
-    async function checkPhoneExistence(phone) {
-        let checkPhone = false;
-        await $.ajax({
-            url: "http://localhost:9999/user/checkphone?phone=" + encodeURIComponent(phone),
-            method: "POST",
-            contentType: "application/x-www-form-urlencoded"
-        }).done(function(item){
-            checkPhone = item.data;
-            console.log("Phone exists?: " + item);
-            console.log(item.data);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.log("Error checking phone: " + textStatus + ": " + errorThrown);
-        });
-        return checkPhone;
-    }
 
     // Đoạn mã tự động thêm dấu gạch ngang vào ngày sinh
     document.getElementById('dob').addEventListener('input', function(e) {

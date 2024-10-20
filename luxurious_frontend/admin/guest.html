@@ -425,6 +425,40 @@
 									<li class="check"><a class="lh-primary-btn" href="#">View all</a></li>
 								</ul>
 							</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Notify sidebar -->
+		<div class="lh-notify-bar-overlay"></div>
+		<div class="lh-notify-bar">
+			<div class="lh-bar-title">
+				<h6>Notifications</h6>
+				<a href="javascript:void(0)" class="close-notify"><i class="ri-close-line"></i></a>
+			</div>
+			<div class="lh-bar-content">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="alert-tab" data-bs-toggle="tab" data-bs-target="#alert"
+							type="button" role="tab" aria-controls="alert" aria-selected="true">Alert</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"
+							type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+					</li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="alert" role="tabpanel" aria-labelledby="alert-tab">
+						<div class="lh-alert-list">
+							<ul id="notification__content">
+
+							</ul>
+							<ul>
+								<li class="check view__more"><a class="lh-primary-btn" href="#">View more</a></li>
+
+							</ul>
+
 						</div>
 						<div class="tab-pane fade" id="messages" role="tabpanel"
 							aria-labelledby="messages-tab">
@@ -519,26 +553,25 @@
 				</div>
 			</div>
 
-			<!-- main content -->
-			<div class="lh-main-content">
-				<div class="container-fluid">
-					<!-- Page title & breadcrumb -->
-					<div class="lh-page-title">
-						<div class="lh-breadcrumb">
-							<h5>Guest</h5>
-							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li>Guest</li>
-							</ul>
-						</div>
-						<div class="lh-tools">
-							<a href="javascript:void(0)" title="Refresh" class="refresh"><i
-									class="ri-refresh-line"></i></a>
-							<div class="filter">
-								<button class="btn-add btn btn-primary" type="button">
-									Add
-								</button>
-							</div>
+		</div>
+		<!-- main content -->
+		<div class="lh-main-content">
+			<div class="container-fluid">
+				<!-- Page title & breadcrumb -->
+				<div class="lh-page-title">
+					<div class="lh-breadcrumb">
+						<h5>Guest</h5>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li>Guest</li>
+						</ul>
+					</div>
+					<div class="lh-tools">
+						<a href="javascript:void(0)" title="Refresh" class="refresh"><i class="ri-refresh-line"></i></a>
+						<div class="filter">
+							<button class="btn-add btn btn-primary" type="button">
+								Add
+							</button>
 						</div>
 					</div>
 					<div class="row">
@@ -723,7 +756,7 @@
 		<script type="text/javascript" charset="utf8"
 			src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
-		<script src='assets/js/vendor/jquery.datatables.min.js'></script>
+ 		<script src='assets/js/vendor/jquery.datatables.min.js'></script>
 		<script src='assets/js/vendor/datatables.bootstrap5.min.js'></script>
 		<script src='assets/js/vendor/datatables.responsive.min.js'></script>
 		<!-- Caleddar -->
@@ -732,15 +765,28 @@
 		<script src="assets/js/vendor/moment.min.js"></script>
 		<script src="assets/js/vendor/daterangepicker.js"></script>
 		<script src="assets/js/vendor/date-range.js"></script>
+ 
+	<!-- Main Custom -->
+	<script src="assets/js/main.js"></script>
+	<script src="js/AllInfoGuest.js"></script>
+	<script src="js/go-to-page.js"></script>
+	<script src="js/guest-delete.js"></script>
+	<script src="js/guest-details.js"></script>
+		<script src="js/authorAdmin.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script src="assets/js/notifications.js"></script>
+</body>
 
 		<!-- Main Custom -->
-		<script src="assets/js/main.js"></script>
+<!-- 		<script src="assets/js/main.js"></script>
 		<script src="js/GuestInfo.js"></script>
 		<script src="js/go-to-page.js"></script>
 		<script src="js/guest-delete.js"></script>
 		<script src="js/guest-details.js"></script>
 		<script src="js/authorAdmin.js"></script>
-	</body>
+	</body> -->
 
 	<!-- Mirrored from maraviyainfotech.com/projects/luxurious-html-v22/admin/guest.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Aug 2024 09:24:36 GMT -->
 </html>

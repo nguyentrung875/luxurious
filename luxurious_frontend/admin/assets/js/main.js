@@ -1018,4 +1018,29 @@
 
 })(jQuery);
 
+var jwtToken = localStorage.getItem('jwt')
 
+$(document).ready(function () {
+    $('.ri-logout-circle-r-line').closest('li').click(function (e) { 
+        e.preventDefault()
+        if (confirm("Do you want to log out?")) {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization':'Bearer ' + jwtToken,
+                },
+                url: "http://localhost:9999/authen/logout",
+                success: function (response) {
+                    localStorage.removeItem('jwt')
+                    window.location.href = "signin.html"
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+    });
+    
+});

@@ -31,7 +31,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, CustomProvider provider) throws Exception {
-        System.out.println("Hello manager");// lợi dụng custom authenprovider để xử lý authentication
+
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .authenticationProvider(provider).build();
     }

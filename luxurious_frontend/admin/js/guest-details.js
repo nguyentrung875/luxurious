@@ -21,7 +21,7 @@ $(document).ready(function () {
 							<div class="lh-card">
 								<div class="lh-card-content card-default">
 									<div class="guest-profile">
-										<img src="assets/img/user/1.jpg" alt="profile">
+										<img src="${valueGuest.linkImage}" alt="profile">
 										<h5>${valueGuest.fullName}</h5>
 										<p>${valueGuest.id}</p>
 									</div>

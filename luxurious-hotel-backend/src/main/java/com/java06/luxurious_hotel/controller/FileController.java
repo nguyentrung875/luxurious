@@ -22,5 +22,13 @@ public class FileController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"").body(resource);
     }
+
+    @GetMapping("/hauchuc/{filename:.+}")
+    public ResponseEntity<?> getFile1(@PathVariable String filename) {
+        Resource resource = filesStorageService.load1(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"").body(resource);
     }
+
+}
 

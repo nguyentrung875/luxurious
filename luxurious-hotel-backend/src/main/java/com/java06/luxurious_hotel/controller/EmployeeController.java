@@ -16,6 +16,15 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    @GetMapping("/myInfo")
+    public ResponseEntity<?> getMyInfo(){
+
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(employeeService.getMyInfo());
+
+        return new ResponseEntity<>(baseResponse , HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> addEmployee(@Valid AddEmployeeRequest addEmployeeRequest) {
         employeeService.addEmployee(addEmployeeRequest);

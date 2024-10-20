@@ -46,6 +46,7 @@ public class AuthenServiceImp implements AuthenService {
         String role = roleAndEmailAndImage.split(" ")[0];
         String email = roleAndEmailAndImage.split(" ")[1];
         String image = roleAndEmailAndImage.split(" ")[2];
+
         AuthorityDTO authorityDTO = new AuthorityDTO();
         authorityDTO.setUsername(request.username());
         authorityDTO.setRole(role);

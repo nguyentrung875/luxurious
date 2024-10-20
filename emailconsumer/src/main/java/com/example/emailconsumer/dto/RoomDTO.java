@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class RoomDTO {
     private int id;
     private String name;
+    private RoomTypeDTO roomTypeDTO;
 }

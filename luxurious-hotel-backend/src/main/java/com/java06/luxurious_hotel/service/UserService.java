@@ -19,10 +19,6 @@ public interface UserService {
 
     Boolean updateUser(UpdateGuestRequest updateGuestRequest);
 
-    Boolean checkEmail(String email);
-
-    Boolean checkPhone(String phone);
-
     GuestDTO getUser(int idUser);
 
 }

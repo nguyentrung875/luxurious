@@ -25,5 +25,6 @@ public record UpdateGuestRequest (
 
         String address,
 
-        String summary){
+        String summary,
+        String image){
 }

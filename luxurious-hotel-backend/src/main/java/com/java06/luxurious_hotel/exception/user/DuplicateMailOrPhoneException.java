@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class DuplicateMailOrPhoneException extends RuntimeException{
 
-    private String message = "Duplicate mail or phone number";
+    private String message;
 
 }

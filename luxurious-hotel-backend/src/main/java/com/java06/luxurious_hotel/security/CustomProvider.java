@@ -1,5 +1,6 @@
 package com.java06.luxurious_hotel.security;
 
+import com.java06.luxurious_hotel.dto.AuthorityDTO;
 import com.java06.luxurious_hotel.entity.UserEntity;
 import com.java06.luxurious_hotel.exception.user.IncorrectPasswordException;
 import com.java06.luxurious_hotel.exception.user.UserNotFoundException;
@@ -38,6 +39,12 @@ public class CustomProvider implements AuthenticationProvider {
         if (!passwordEncoder.matches(password, userEntity.getPassword())){
             throw new IncorrectPasswordException();
         }
+
+//        AuthorityDTO authorityDTO = new AuthorityDTO();
+//        authorityDTO.setId(userEntity.getId());
+//        authorityDTO.setEmail(userEntity.getEmail());
+//        authorityDTO.setFirstName(userEntity.getFirstName());
+//        authorityDTO.setLastName(userEntity.getLastName());
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority(userEntity.getRole().getName()+" "+userEntity.getEmail()+" "+"http://localhost:9999/file/"+userEntity.getImage()));

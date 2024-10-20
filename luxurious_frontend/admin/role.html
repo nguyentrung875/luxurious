@@ -312,7 +312,7 @@
 		<div class="lh-notify-bar-overlay"></div>
 		<div class="lh-notify-bar">
 			<div class="lh-bar-title">
-				<h6>Notifications<span class="label">12</span></h6>
+				<h6>Notifications</h6>
 				<a href="javascript:void(0)" class="close-notify"><i class="ri-close-line"></i></a>
 			</div>
 			<div class="lh-bar-content">
@@ -329,72 +329,14 @@
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="alert" role="tabpanel" aria-labelledby="alert-tab">
 						<div class="lh-alert-list">
-							<ul>
-								<li>
-									<div class="icon lh-alert">
-										<i class="ri-alarm-warning-line"></i>
-									</div>
-									<div class="detail">
-										<div class="title">Your final report is overdue</div>
-										<p class="time">Just now</p>
-										<p class="message">Please submit your quarterly report before - June 15.</p>
-									</div>
-								</li>
-								<li>
-									<div class="icon lh-warn">
-										<i class="ri-error-warning-line"></i>
-									</div>
-									<div class="detail">
-										<div class="title">Your Booking campaign is stop!</div>
-										<p class="time">5:45AM - 25/05/2024</p>
-										<p class="message">Please submit your quarterly report before Jun 15.</p>
-									</div>
-								</li>
-								<li>
-									<div class="icon lh-success">
-										<i class="ri-check-double-line"></i>
-									</div>
-									<div class="detail">
-										<div class="title">Your payment is successfully processed</div>
-										<p class="time">9:20PM - 19/06/2024</p>
-										<p class="message">Check your account wallet. if there is any issue, create
-											support ticket.</p>
-									</div>
-								</li>
-								<li>
-									<div class="icon lh-warn">
-										<i class="ri-error-warning-line"></i>
-									</div>
-									<div class="detail">
-										<div class="title">Budget threshold exceeded!</div>
-										<p class="time">4:15AM - 01/04/2024</p>
-										<p class="message">Budget threshold was exceeded for project "Luxurious" B612
-											elements.</p>
-									</div>
-								</li>
-								<li>
-									<div class="icon lh-warn">
-										<i class="ri-close-line"></i>
-									</div>
-									<div class="detail">
-										<div class="title">Booking was decline!</div>
-										<p class="time">4:15AM - 01/04/2024</p>
-										<p class="message">Your booking "B126" is declined by Theresa Mayeras.</p>
-									</div>
-								</li>
-								<li>
-									<div class="icon lh-success">
-										<i class="ri-check-double-line"></i>
-									</div>
-									<div class="detail">
-										<div class="title">Your payment is successfully processed</div>
-										<p class="time">9:20PM - 19/06/2024</p>
-										<p class="message">Check your account wallet. if there is any issue, create
-											support ticket.</p>
-									</div>
-								</li>
-								<li class="check"><a class="lh-primary-btn" href="#">View all</a></li>
+							<ul id="notification__content">
+
 							</ul>
+							<ul>
+								<li class="check view__more"><a class="lh-primary-btn" href="#">View more</a></li>
+
+							</ul>
+
 						</div>
 					</div>
 					<div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
@@ -1355,6 +1297,11 @@
 
 	<!-- Main Custom -->
 	<script src="assets/js/main.js"></script>
+
+	<!-- Notification websocket -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script src="assets/js/notifications.js"></script>
 </body>
 
 

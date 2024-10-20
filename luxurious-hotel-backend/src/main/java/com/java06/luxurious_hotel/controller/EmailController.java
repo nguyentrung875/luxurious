@@ -46,15 +46,8 @@ public class EmailController {
     //Gửi thông tin booking cần confirm lên RabbitMQ để xử lý gửi email confirm
     @PostMapping("/sendBookingInfoToQueue")
     public ResponseEntity<?> sendToQueue(@RequestBody AddBookingRequest request){
-        try {
-            String json = objectMapper.writeValueAsString(request);
-            rabbitTemplate.convertAndSend(RabbitmqConfig.BOOKING_EMAIL_EXCHANGE,RabbitmqConfig.CONFIRM_BOOKING_EMAIL_ROUTING_KEY,json);
-        } catch (Exception e) {
-            throw new RuntimeException("Error parse json AddBookingRequest: " + e);
-        }
-
         BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setMessage("sent booking info to Queue");
+        baseResponse.setMessage(emailService.sendConfirmBookingEmailToQueue(request));
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 }

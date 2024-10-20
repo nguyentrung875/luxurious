@@ -68,13 +68,25 @@ public class GlobalException {
         return new ResponseEntity<>(baseResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    //Bắt exception trùng dữ liệu unique
+    //Bắt exception trùng dữ liệu unique          --> cho e ké bắt dublicate data này tí, tạo 2 hàm trùng DataIntegrityViolationException bị lỗi
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<?> handeValidation(DataIntegrityViolationException e) {
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatusCode(500);
-        baseResponse.setMessage(e.getRootCause().getMessage());
-        return new ResponseEntity<>(baseResponse, HttpStatus.BAD_REQUEST);
+        //        baseResponse.setMessage(e.getRootCause().getMessage());
+
+        // Kiểm tra nguyên nhân gốc
+        Throwable rootCause = e.getRootCause();
+        if (rootCause != null && rootCause.getMessage().contains("Duplicate entry")) {
+            baseResponse.setMessage("Duplicate mail or phone number");
+            return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+        } else {
+            baseResponse.setMessage(e.getRootCause().getMessage());
+            return new ResponseEntity<>(baseResponse, HttpStatus.BAD_REQUEST);
+        }
+
+
+//        return new ResponseEntity<>(baseResponse, HttpStatus.BAD_REQUEST);
     }
 
 //    Handle Exception ROOM ------------------------------------------------------------------------
