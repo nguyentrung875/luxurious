@@ -43,7 +43,6 @@ function showNotifications(pageNumber, pageSize) {
         contentType: "application/json; charset=utf-8",
         url: `http://localhost:9999/notifications?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         success: function (response) {
-            console.log(response)
             let notifications = $('#notification__content')
 
             

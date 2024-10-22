@@ -50,6 +50,7 @@ public class SecurityConfig {
                                 .requestMatchers("/roomType/file/**").permitAll()// hình ảnh
                                 .requestMatchers("/file/**").permitAll()// hình ảnh
                                 .requestMatchers(HttpMethod.GET,"/room").permitAll()// search Avai Room
+                                .requestMatchers(HttpMethod.POST,"/room").permitAll()// search Avai Room
                                 .requestMatchers(HttpMethod.GET,"/roomType/detail/**").permitAll()// sear avai detail
                                 .requestMatchers(HttpMethod.GET,"/booking/p").permitAll()
                                 .requestMatchers("/email/**").permitAll()
@@ -62,7 +63,10 @@ public class SecurityConfig {
                                 .requestMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers("/user/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers("/room/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
-//                        .anyRequest().authenticated()
+
+                                .requestMatchers("/ws/**").permitAll()
+                                .requestMatchers("notifications/**").permitAll()
+                        .anyRequest().authenticated()
                         //.requestMatchers("/**").permitAll()
                 )
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)

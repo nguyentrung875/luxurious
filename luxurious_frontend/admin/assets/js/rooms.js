@@ -1,3 +1,5 @@
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function () {
     var selectDate = $('#custom_single_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
     showAllRooms(selectDate)
@@ -14,6 +16,9 @@ function showAllRooms(selectDate) {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         url: `http://localhost:9999/room/${selectDate}`,
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         success: function (response) {
             $('#rooms_content').empty();
             let html = ''
