@@ -1,3 +1,5 @@
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function () {
 
     getGuest()
@@ -9,6 +11,9 @@ $(document).ready(function () {
 function getGuest(){
     $.ajax({
         url: "http://localhost:9999/user/guests",
+		headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         method: "GET"
     }).done(function( response){
         if(response.data){
