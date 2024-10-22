@@ -65,7 +65,7 @@ public class SecurityConfig {
                                 .requestMatchers("/room/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
 
                                 .requestMatchers("/ws/**").permitAll()
-                                .requestMatchers("notifications/**").permitAll()
+                                .requestMatchers("notifications/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
                         .anyRequest().authenticated()
                         //.requestMatchers("/**").permitAll()
                 )
