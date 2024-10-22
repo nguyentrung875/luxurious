@@ -60,6 +60,8 @@
 //     });
 // });
 
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function() {
 
     loadRoomTypes();
@@ -70,7 +72,11 @@ $(document).ready(function() {
             const response = await $.ajax({
                 url: "http://localhost:9999/roomType",
                 type: "GET",
-                dataType: "json"
+                //dataType: "json",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": "Bearer " + token   
+                }
             });
 
             // Kiểm tra xem dữ liệu có hợp lệ không
@@ -93,6 +99,9 @@ $(document).ready(function() {
         type: "GET",
         dataType: "json",
         contentType: "application/json",
+        headers: {
+            "Authorization": "Bearer " + token   
+        },
         success: function(response) {
             $("#list-rooms").empty();
 
@@ -118,6 +127,9 @@ $(document).ready(function() {
                         $.ajax({
                             url: "http://localhost:9999/room/" + roomId,  
                             type: "DELETE",
+                            headers: {
+                                "Authorization": "Bearer " + token   
+                            },
                             success: function(response) {
                                 if (response.statusCode === 200) {
                                     alert("Room deleted successfully!");
@@ -141,6 +153,9 @@ $(document).ready(function() {
                         url: "http://localhost:9999/room/getRoom/" + roomId,  
                         type: "GET",
                         dataType: "json",
+                        headers: {
+                            "Authorization": "Bearer " + token   
+                        },
                         success: function(response) {
                             if (response && response.data) {
                                 // Điền thông tin vào form
@@ -185,7 +200,10 @@ $(document).ready(function() {
             const response = await $.ajax({
                 url: "http://localhost:9999/roomType",
                 type: "GET",
-                dataType: "json"
+                dataType: "json",
+                headers: {
+                    "Authorization": "Bearer " + token   
+                }
             });
 
             // Kiểm tra xem dữ liệu có hợp lệ không
@@ -222,7 +240,10 @@ $(document).ready(function() {
                 url: 'http://localhost:9999/room/addRoom', // Đường dẫn đến API thêm phòng
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify(roomData)
+                data: JSON.stringify(roomData),
+                headers: {
+                    "Authorization": "Bearer " + token   
+                }
             });
 
             if (response.statusCode === 200) {
@@ -272,6 +293,9 @@ $(document).ready(function() {
             contentType: "application/json", // Loại nội dung
             dataType: "json", // Kiểu dữ liệu trả về
             data: JSON.stringify(updateRoomRequest), // Chuyển đổi đối tượng thành JSON
+            headers: {
+                "Authorization": "Bearer " + token   
+            },
             success: function(response) {
                 // Xử lý kết quả trả về từ API
                 if (response && response.data) {

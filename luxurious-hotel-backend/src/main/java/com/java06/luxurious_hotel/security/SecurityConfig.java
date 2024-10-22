@@ -4,6 +4,7 @@ import com.java06.luxurious_hotel.filter.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,6 +31,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, CustomProvider provider) throws Exception {
+
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .authenticationProvider(provider).build();
     }
@@ -42,16 +44,31 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/**").permitAll()
-//                        .requestMatchers("/authen/login").permitAll()
-//                        .requestMatchers("/booking/**").hasAuthority("ROLE_ADMIN")
+
+                        .requestMatchers("/authen/**").permitAll()
+
+                                .requestMatchers("/roomType/file/**").permitAll()// hình ảnh
+                                .requestMatchers("/file/**").permitAll()// hình ảnh
+                                .requestMatchers(HttpMethod.GET,"/room").permitAll()// search Avai Room
+                                .requestMatchers(HttpMethod.GET,"/roomType/detail/**").permitAll()// sear avai detail
+                                .requestMatchers(HttpMethod.GET,"/booking/p").permitAll()
+                                .requestMatchers("/email/**").permitAll()
+
+
+                                .requestMatchers("/roomType/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
+                                .requestMatchers("/booking/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
+                                .requestMatchers("/status/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
+
+                                .requestMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers("/user/**").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers("/room/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
 //                        .anyRequest().authenticated()
+                        //.requestMatchers("/**").permitAll()
                 )
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                // nếu khi Author bị vấn đề thì httpBasic sẽ gọi đến EntryPoint để báo lỗi 401
                 .httpBasic(basic-> basic.authenticationEntryPoint(authenticationEntryPoint))
-                .exceptionHandling(Customizer.withDefaults())
-
-                ;
+                .exceptionHandling(Customizer.withDefaults());
 
         return httpSecurity.build();
     }

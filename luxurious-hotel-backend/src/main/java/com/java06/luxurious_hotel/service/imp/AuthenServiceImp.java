@@ -39,18 +39,25 @@ public class AuthenServiceImp implements AuthenService {
                 new UsernamePasswordAuthenticationToken(request.username(), request.password());
         Authentication authen = authenticationManager.authenticate(authenToken);
 
-
-
-        String role = authen.getAuthorities()
+        String roleAndEmailAndImage = authen.getAuthorities()
                 .stream().map(grantedAuthority -> grantedAuthority.getAuthority().toString()
                 ).findFirst().get();
 
-//        AuthorityDTO authorityDTO1 = (AuthorityDTO) authen.getPrincipal();
-//        System.out.println(authorityDTO1);
+        String role = roleAndEmailAndImage.split(" ")[0];
+        String email = roleAndEmailAndImage.split(" ")[1];
+        String image = roleAndEmailAndImage.split(" ")[2];
 
         AuthorityDTO authorityDTO = new AuthorityDTO();
         authorityDTO.setUsername(request.username());
         authorityDTO.setRole(role);
+        authorityDTO.setEmail(email);
+        authorityDTO.setImage(image);
+
+
+
+        System.out.println("Username: " + request.username()+ " Role: " + role+" Email: " + email+" Image: " + image);
+
+
 
         return jwtUtils.generateJwtToken(authorityDTO);
     }
