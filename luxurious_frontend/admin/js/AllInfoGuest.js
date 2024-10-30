@@ -18,7 +18,10 @@ function getGuest(){
     }).done(function( response){
         if(response.data){
             var html = ""
+			var dt = $('#guest_table').DataTable();
+			dt.destroy();
             for(i=0;i<response.data.length;i++){
+	
 
                 var item = response.data[i]
                 html += `<tr>
@@ -52,8 +55,10 @@ function getGuest(){
 
             }
 
-			
+
             $('#list-guests').html(html);
+			$('#guest_table').DataTable();
+
 
 			// // Khởi tạo DataTable
 			// $('#guest_table').DataTable({
