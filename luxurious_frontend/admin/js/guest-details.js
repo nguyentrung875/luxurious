@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	var token = localStorage.getItem('jwt');
 
     // Lấy giá trị của tham số id từ URL
     var urlParams = new URLSearchParams(window.location.search);
@@ -10,6 +11,9 @@ $(document).ready(function () {
         url: "http://localhost:9999/user/allbookingguest",
         method: "POST",
         contentType: "application/x-www-form-urlencoded",
+		headers: {
+            "Authorization": "Bearer " + token   
+        },
         data: { idGuest: id },        
     }).done(function(item){
         if(item.data && item.data.length > 0){

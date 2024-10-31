@@ -56,6 +56,7 @@ public class SecurityConfig {
                                 .requestMatchers("/email/**").permitAll()
 
 
+
                                 .requestMatchers("/roomType/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
                                 .requestMatchers("/booking/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
                                 .requestMatchers("/status/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
