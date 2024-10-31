@@ -1,4 +1,5 @@
-$(document).ready(function () {    
+$(document).ready(function () {
+    var token = localStorage.getItem('jwt');
     
     $(document).on('click', '.delete-btn',function(e) {
         e.preventDefault();
@@ -21,6 +22,9 @@ $(document).ready(function () {
                 url: "http://localhost:9999/user/deleteguest",
                 method: "POST",
                 contentType: "application/x-www-form-urlencoded", // RequestParam
+                headers: {
+                    "Authorization": "Bearer " + token   
+                },        
                 data: { idGuest: id },
                 success: function (response) {
                     if (response.data === true) {

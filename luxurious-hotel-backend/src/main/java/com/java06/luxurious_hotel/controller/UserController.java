@@ -33,8 +33,6 @@ public class UserController {
     @Autowired
     private BookingService bookingService;
 
-
-
     @GetMapping("/p{phone}")
     public ResponseEntity<?> getGuestInfoByPhone(@PathVariable(name = "phone") @NotBlank(message = "Please enter your phone!") String phone){
 

@@ -8,6 +8,7 @@ import com.java06.luxurious_hotel.exception.user.UserNotFoundException;
 import com.java06.luxurious_hotel.repository.*;
 import com.java06.luxurious_hotel.request.AddGuestRequest;
 import com.java06.luxurious_hotel.request.UpdateGuestRequest;
+import com.java06.luxurious_hotel.service.EmailService;
 import com.java06.luxurious_hotel.service.UserService;
 import com.java06.luxurious_hotel.supportmethod.ParseName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class UserServiceIMP implements UserService {
 
     @Autowired
     private OrdersRepository ordersRepository;
+
 
     @Override
     public GuestDTO getUser(int idUser) {
@@ -169,11 +171,7 @@ public class UserServiceIMP implements UserService {
                 guestDTO.setAddress(user.getAddress());
                 guestDTO.setSummary(user.getSummary());
 
-                if (user.getImage() != null){
-                    guestDTO.setLinkImage("http://localhost:9999/file/hauchuc/" + user.getImage());
-                }else {
-                    guestDTO.setLinkImage("");
-                }
+                guestDTO.setLinkImage("http://localhost:9999/file/hauchuc/client.PNG");
 
                 guestDTOS.add(guestDTO);
             }

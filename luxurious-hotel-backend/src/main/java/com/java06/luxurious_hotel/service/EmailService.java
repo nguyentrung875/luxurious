@@ -16,5 +16,8 @@ public interface EmailService {
     String sendConfirmBookingEmail(int idBooking) throws MessagingException;
     String sendSuccessfulBookingEmailToQueue(BookingDTO bookingDTO);
     String sendConfirmBookingEmailToQueue(AddBookingRequest bookingDTO);
-
+    void sendMailResetPassWord(String emailSend,String pass,String to, String subject, String content);
+    String resetPassword(String email);
+    String keyConfirmResetPass(String email);
+    String confirmResetPass(String token,String password);
 }
