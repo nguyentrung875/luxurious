@@ -7,6 +7,7 @@ import com.java06.luxurious_hotel.dto.BookingDTO;
 import com.java06.luxurious_hotel.entity.BookingEntity;
 import com.java06.luxurious_hotel.entity.RoomBookingEntity;
 import com.java06.luxurious_hotel.entity.UserEntity;
+import com.java06.luxurious_hotel.entity.UserEntity;
 import com.java06.luxurious_hotel.exception.authen.TokenExpirationException;
 import com.java06.luxurious_hotel.exception.booking.BookingNotFoundException;
 import com.java06.luxurious_hotel.repository.BookingRepository;
@@ -55,6 +56,9 @@ public class EmailServiceImp implements EmailService {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private final JavaMailSender mailSender;
 
@@ -312,7 +316,62 @@ public class EmailServiceImp implements EmailService {
         return "sent confirm booking to queue";
     }
 
+    @Override
+    public String sendConfirmCreateUser(String toEmail) throws MessagingException {
+        String confirmToken = jwtUtils.generateConfirmCreateUser(toEmail);
+        String subject = "Confirm Account";
+        String url = "http://localhost:9999/signup/confirm?token=" + confirmToken;
+
+        String body = "<html>" +
+                "<body>" +
+                "<p>Please click here to verify your account:</p>" +
+                "<a href=\"" + url + "\" style=\"display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: green; text-decoration: none; border-radius: 5px;\">Click here to verify your account</a>" +
+                "<p style=\"margin-top: 20px;\">This link is only valid for 15 minutes.</p>" +
+                "<p>Please do not reply to this email.</p>" +
+                "</body>" +
+                "</html>";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true,"UTF-8");
+        helper.setTo(toEmail);
+        helper.setSubject(subject);
+        helper.setText(body, true); // `true` indicates this is HTML content
+        mailSender.send(message);
+        return "Send successful";
+    }
+
+    @Override
+    public String ReSendConfirmCreateUser(String toEmail) throws MessagingException {
+        UserEntity user = userRepository.findUserEntityByEmail(toEmail);
+        if (user != null && user.getEnabled()!= true) {
+            String confirmToken = jwtUtils.generateConfirmCreateUser(toEmail);
+            String subject = "Confirm Account";
+            String url = "http://localhost:9999/signup/confirm?token=" + confirmToken;
+
+            String body = "<html>" +
+                    "<body>" +
+                    "<p>Please click here to verify your account:</p>" +
+                    "<a href=\"" + url + "\" style=\"display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: green; text-decoration: none; border-radius: 5px;\">Click here to verify your account</a>" +
+                    "<p style=\"margin-top: 20px;\">This link is only valid for 15 minutes.</p>" +
+                    "<p>Please do not reply to this email.</p>" +
+                    "</body>" +
+                    "</html>";
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true,"UTF-8");
+            helper.setTo(toEmail);
+            helper.setSubject(subject);
+            helper.setText(body, true); // `true` indicates this is HTML content
+            mailSender.send(message);
+        }else {
+            throw new RuntimeException("Account has been activated or does not exist!");
+        }
+        return "Send successful";
+    }
+    }
 
 
 
-}
+
+
+

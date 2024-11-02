@@ -5,6 +5,7 @@ import com.java06.luxurious_hotel.config.RabbitmqConfig;
 import com.java06.luxurious_hotel.request.AddBookingRequest;
 import com.java06.luxurious_hotel.response.BaseResponse;
 import com.java06.luxurious_hotel.service.EmailService;
+import com.java06.luxurious_hotel.service.SignUpService;
 import com.java06.luxurious_hotel.service.imp.EmailServiceImp;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ public class EmailController {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -83,4 +85,13 @@ public class EmailController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+
+
+    @GetMapping("/resend")
+    public  ResponseEntity<?> resendEmail(String email) throws MessagingException {
+        emailService.ReSendConfirmCreateUser(email);
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setMessage("send email success");
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
 }

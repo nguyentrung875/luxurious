@@ -159,7 +159,11 @@ public class EmployeeServiceImp implements EmployeeService {
             employeeDTO.setEmail(userEntity.getEmail());
             employeeDTO.setAddress(userEntity.getAddress());
             employeeDTO.setDob(userEntity.getDob());
-            employeeDTO.setImage(imageBaseUrl + userEntity.getImage());
+            if (userEntity.getImage() != null){
+                employeeDTO.setImage(imageBaseUrl + userEntity.getImage());
+            }else{
+                employeeDTO.setImage("http://localhost:9999/file/item.jpg.jpg");
+            }
             employeeDTO.setSumary(userEntity.getSummary());
             employeeDTO.setPhone(userEntity.getPhone());
             RoleDTO roleDTO= new RoleDTO();

@@ -1,9 +1,14 @@
 $(document).ready(function() {
+    var token = localStorage.getItem('jwt');
     // Function to fetch roles
     function fetchRoles() {
         $.ajax({
             url: 'http://localhost:9999/role',  // The API endpoint
             method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + token   
+            },
+    
             success: function(response) {
                 if(response.statusCode === 200) {
                     let roles = response.data;

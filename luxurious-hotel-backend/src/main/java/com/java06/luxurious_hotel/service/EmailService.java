@@ -20,4 +20,6 @@ public interface EmailService {
     String resetPassword(String email);
     String keyConfirmResetPass(String email);
     String confirmResetPass(String token,String password);
+    String sendConfirmCreateUser(String toEmail) throws MessagingException;
+    String ReSendConfirmCreateUser(String toEmail) throws MessagingException;
 }
