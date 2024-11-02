@@ -1,15 +1,17 @@
 $(document).ready(function () {
 
-    getGuest()
-
-	
+    getGuest()	
 
 });
 
 function getGuest(){
+	var token = localStorage.getItem('jwt');
     $.ajax({
         url: "http://localhost:9999/user/guests",
-        method: "POST"
+        method: "POST",
+		headers: {
+            "Authorization": "Bearer " + token   
+        }
     }).done(function( response){
         if(response.data){
             var html = ""

@@ -1,3 +1,5 @@
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function () {
 
     //Hiển thị notification từ database
@@ -42,8 +44,10 @@ function showNotifications(pageNumber, pageSize) {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         url: `http://localhost:9999/notifications?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         success: function (response) {
-            console.log(response)
             let notifications = $('#notification__content')
 
             

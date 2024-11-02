@@ -1,7 +1,12 @@
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function() {
     $.ajax({
         url: 'http://localhost:9999/role/allrole',  // URL API
         method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         success: function(response) {
             if (response.statusCode === 200) {
                 let data = response.data;

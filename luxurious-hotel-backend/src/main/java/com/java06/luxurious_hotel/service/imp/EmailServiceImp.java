@@ -2,16 +2,23 @@ package com.java06.luxurious_hotel.service.imp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java06.luxurious_hotel.config.RabbitmqConfig;
+import com.java06.luxurious_hotel.dto.AuthorityDTO;
 import com.java06.luxurious_hotel.dto.BookingDTO;
 import com.java06.luxurious_hotel.entity.BookingEntity;
 import com.java06.luxurious_hotel.entity.RoomBookingEntity;
 import com.java06.luxurious_hotel.entity.UserEntity;
+import com.java06.luxurious_hotel.entity.UserEntity;
+import com.java06.luxurious_hotel.exception.authen.TokenExpirationException;
 import com.java06.luxurious_hotel.exception.booking.BookingNotFoundException;
 import com.java06.luxurious_hotel.repository.BookingRepository;
 import com.java06.luxurious_hotel.repository.UserRepository;
 import com.java06.luxurious_hotel.request.AddBookingRequest;
+import com.java06.luxurious_hotel.request.AuthenRequest;
 import com.java06.luxurious_hotel.service.EmailService;
 import com.java06.luxurious_hotel.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
@@ -19,13 +26,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,6 +64,104 @@ public class EmailServiceImp implements EmailService {
 
     @Value("${spring.mail.from}")
     private String emailFrom;
+
+    @Autowired
+    private MailProperties mailProperties;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public String confirmResetPass(String token,String password) {
+
+        try {
+
+            // Lấy các claims từ token
+            Jws<Claims> claims = jwtUtils.getClaims(token);
+
+            String email = claims.getBody().getSubject();
+
+            UserEntity user = userRepository.findUserEntityByEmail(email);
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+            String keyPassword = passwordEncoder.encode(password);
+
+            System.out.println(user);
+            System.out.println("keyPassword: " + password);
+
+            userRepository.resetPassword(user.getId(),keyPassword);
+
+            return "Complete!";
+
+        }catch (RuntimeException e) {
+            throw new TokenExpirationException();
+        }
+
+    }
+
+    @Override
+    public String resetPassword(String email) {
+
+        UserEntity userEntity = userRepository.findUserEntityByEmail(email);
+
+        String path = "http://localhost:9999/email/confirmpassword/";
+
+        if (userEntity != null) {
+
+            String subject = "Recover password Hotel";
+            String content = "Dear " + userEntity.getFirstName() + " " + userEntity.getLastName() + ",\n\n"
+                    + "We received a request to reset your password for your account. "
+                    + "Please click the link below to reset your password:\n\n"
+                    + path + email + "\n\n"
+                    + "If you did not request this password reset, please ignore this email "
+                    + "or contact our support team if you have any concerns.\n\n"
+                    + "Best regards,\n"
+                    + "Luxurious Hotel team";
+
+            sendMailResetPassWord("hau.chuc95@gmail.com","olft ksqm henm txpe",email,subject,content);
+
+            return "Email sent, please check your inbox.";
+
+        }else {
+            return "Email not found";
+        }
+    }
+
+    @Override
+    public String keyConfirmResetPass(String email) {
+        AuthorityDTO authorityDTO = new AuthorityDTO();
+        UserEntity userEntity = userRepository.findUserEntityByEmail(email);
+
+        authorityDTO.setUsername(userEntity.getUsername());
+        authorityDTO.setEmail(email);
+        authorityDTO.setFirstName(userEntity.getFirstName());
+        authorityDTO.setLastName(userEntity.getLastName());
+        authorityDTO.setRole(String.valueOf(userEntity.getRole()));
+
+        return jwtUtils.generateJwtTokenResetPassword(authorityDTO);
+    }
+
+    @Override
+    public void sendMailResetPassWord(String emailSend,String pass,String to, String subject, String content) {
+
+        // setup mail gửi
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost(mailProperties.getHost());
+        mailSender.setPort(mailProperties.getPort());
+        mailSender.setUsername(emailSend);
+        mailSender.setPassword(pass);
+        Properties props = mailSender.getJavaMailProperties();
+        props.putAll(mailProperties.getProperties());
+
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(content);
+
+        mailSender.send(message);
+    }
 
     public String sendEmail(String recipients, String subject, String content, MultipartFile[] files) throws MessagingException {
         System.out.println("Email sending...");
@@ -258,6 +369,9 @@ public class EmailServiceImp implements EmailService {
         return "Send successful";
     }
     }
+
+
+
 
 
 

@@ -26,8 +26,10 @@ public class JwtUtils {
     @Value("${jwt.key}")
     private String secretKeyString;
 
-    //private long EXPIRATION_TIME = 365L * 24 * 60 * 60 * 1000; //1 năm
-    private long EXPIRATION_TIME = 60 * 1000; //1 p
+    private long EXPIRATION_TIME = 365L * 24 * 60 * 60 * 1000; //1 năm
+//    private long EXPIRATION_TIME = 60 * 1000; //1 p
+
+    private long EXPIRATION_TIME_1P = 60 * 1000; // 1 phút
 
     private long CONFIRM_EXP_TIME = 15*60*1000; //15 phút confirm booking
 
@@ -38,6 +40,21 @@ public class JwtUtils {
                 .subject(String.valueOf(idBooking))
                 .issuedAt(new Date())
                 .expiration(new Date(now.getTime() + CONFIRM_EXP_TIME))
+                .signWith(secretKey)
+                .compact();
+    }
+
+    public String generateJwtTokenResetPassword(AuthorityDTO authorityDTO) {
+        var secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKeyString));
+        Date now = new Date();
+        //System.out.println(authorityDTO.getUsername()+" "+authorityDTO.getEmail()+" "+authorityDTO.getRole()+" "+authorityDTO.getImage());
+        return Jwts.builder()
+                .subject(authorityDTO.getEmail())
+                .issuedAt(new Date())
+                .expiration(new Date(now.getTime() + EXPIRATION_TIME_1P))
+                .claim("role", authorityDTO.getRole())
+                .claim("email", authorityDTO.getEmail())
+                .claim("avatar", authorityDTO.getImage())
                 .signWith(secretKey)
                 .compact();
     }

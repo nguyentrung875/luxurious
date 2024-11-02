@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var token = localStorage.getItem('jwt');
 
     loadGuestData();
 
@@ -72,6 +73,9 @@ $(document).ready(function () {
                 url: "http://localhost:9999/user/updateguest",
                 method: "POST",
                 contentType:"application/json", // RequestBody
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
                 data:JSON.stringify({
                     
                         "idGuest": guestData.idGuest,
@@ -134,6 +138,9 @@ function loadGuestData() {
     $.ajax({
         url: `http://localhost:9999/user/getvalueuserbyid/${id}`, // PathVariable
         method: "POST",
+        headers: {
+            "Authorization": "Bearer " + token
+        },
     }).done(function(item){
         
         if(item.data.id > 0){

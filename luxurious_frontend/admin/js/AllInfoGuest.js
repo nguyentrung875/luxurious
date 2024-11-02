@@ -1,3 +1,5 @@
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function () {
 
     getGuest()
@@ -9,11 +11,17 @@ $(document).ready(function () {
 function getGuest(){
     $.ajax({
         url: "http://localhost:9999/user/guests",
+		headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         method: "GET"
     }).done(function( response){
         if(response.data){
             var html = ""
+			var dt = $('#guest_table').DataTable();
+			dt.destroy();
             for(i=0;i<response.data.length;i++){
+	
 
                 var item = response.data[i]
                 html += `<tr>
@@ -47,8 +55,10 @@ function getGuest(){
 
             }
 
-			
+
             $('#list-guests').html(html);
+			$('#guest_table').DataTable();
+
 
 			// // Khởi tạo DataTable
 			// $('#guest_table').DataTable({

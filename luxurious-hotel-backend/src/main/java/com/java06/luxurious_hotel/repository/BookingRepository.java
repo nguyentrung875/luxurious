@@ -13,6 +13,11 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends JpaRepository<BookingEntity, Integer> {
 
+    List<BookingEntity> findByCheckOutAfterAndCheckInBefore(LocalDateTime startDate, LocalDateTime endDate);
+    List<BookingEntity> findByCheckOutGreaterThanEqualAndCheckInLessThanEqual(LocalDateTime startDate, LocalDateTime endDate);
+
+    List<BookingEntity> findByCheckOutBetween(LocalDateTime startDate, LocalDateTime endDate);
+
     List<Object[]> findByGuest_Id(int userId);
     void deleteAllByGuest_Id(int userId);
     boolean existsByGuest_Id(int userId);

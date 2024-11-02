@@ -1,6 +1,7 @@
 package com.java06.luxurious_hotel.exception;
 
 import com.java06.luxurious_hotel.exception.Employee.EmployeeNotExitsException;
+import com.java06.luxurious_hotel.exception.authen.TokenExpirationException;
 import com.java06.luxurious_hotel.exception.booking.BookingNotFoundException;
 import com.java06.luxurious_hotel.exception.room.RoomNotAvailableException;
 import com.java06.luxurious_hotel.exception.room.RoomNotFoundException;
@@ -9,6 +10,7 @@ import com.java06.luxurious_hotel.exception.roomType.RoomTypeNotFoundException;
 import com.java06.luxurious_hotel.exception.user.IncorrectPasswordException;
 import com.java06.luxurious_hotel.exception.user.UserNotFoundException;
 import com.java06.luxurious_hotel.response.BaseResponse;
+import io.jsonwebtoken.JwtException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -18,9 +20,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.nio.charset.StandardCharsets;
+import java.security.SignatureException;
 
 @RestControllerAdvice
 public class GlobalException {
+
+    @ExceptionHandler({TokenExpirationException.class, JwtException.class, SignatureException.class})
+    public ResponseEntity<?> tokenExeption(Exception e) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setStatusCode(200);
+        baseResponse.setMessage(e.getMessage()); // Thông báo lỗi hết hạn token
+
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<?> handleException(Exception e) {

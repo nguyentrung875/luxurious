@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var token = localStorage.getItem('jwt');
 
     $('#guestadd-btn').click(async function(){
 

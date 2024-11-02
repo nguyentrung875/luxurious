@@ -1,3 +1,5 @@
+var token = localStorage.getItem('jwt');
+
 $(document).ready(function () {
     //KHỞI TẠO CHOSEN
     $('.chosen-select').chosen({
@@ -116,6 +118,9 @@ function deleteBooking(id) {
         type: "DELETE",
         contentType: "application/json; charset=utf-8",
         url: `http://localhost:9999/booking/${id}`,
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         success: function (response) {
             if (response.statusCode == 200) {
                 alert(response.message)
@@ -133,6 +138,9 @@ function updateBooking(inputEditBooking) {
         type: "PUT",
         contentType: "application/json; charset=utf-8",
         url: "http://localhost:9999/booking",
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         data: JSON.stringify(inputEditBooking),
         success: function (response) {
             if (response.statusCode == 200) {
@@ -196,6 +204,9 @@ function addBooking(inputAddBooking) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         url: "http://localhost:9999/booking",
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         data: JSON.stringify(inputAddBooking),
         success: function (response) {
             if (response.statusCode == 200) {
@@ -214,6 +225,9 @@ function loadAvailableRooms(inputDateRange) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         url: "http://localhost:9999/room",
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         data: JSON.stringify(inputDateRange),
         success: function (response) {
 
@@ -241,6 +255,9 @@ function showAllRooms() {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         url: "http://localhost:9999/roomType",
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         success: function (response) {
             html = ''
             for (let i = 0; i < response.data.length; i++) {
@@ -263,6 +280,9 @@ function showStatus() {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         url: "http://localhost:9999/status",
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         success: function (response) {
             response.data.listPaymentStatus.forEach(item => {
                 $("#input_payment_status").append(`<option value="${item.id}">${item.name}</option>`);
@@ -298,6 +318,9 @@ function showBooking() {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         url: "http://localhost:9999/booking",
+        headers: {
+            "Authorization": "Bearer " + token  // Truyền token vào header
+        },
         success: function (response) {
 
             var dt = $('#booking_table').DataTable();
