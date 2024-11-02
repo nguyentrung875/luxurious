@@ -29,7 +29,7 @@ public class JwtUtils {
     //private long EXPIRATION_TIME = 365L * 24 * 60 * 60 * 1000; //1 năm
     private long EXPIRATION_TIME = 60 * 1000; //1 p
 
-    private long CONFIRM_EXP_TIME = 15L*60*1000; //15 phút confirm booking
+    private long CONFIRM_EXP_TIME = 15*60*1000; //15 phút confirm booking
 
     public String generateConfirmBookingToken(int idBooking) {
         var secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKeyString));
@@ -41,6 +41,18 @@ public class JwtUtils {
                 .signWith(secretKey)
                 .compact();
     }
+
+    public String generateConfirmCreateUser(String email) {
+        var secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKeyString));
+        Date now = new Date();
+        return Jwts.builder()
+                .subject(String.valueOf(email))
+                .issuedAt(new Date())
+                .expiration(new Date(now.getTime() + CONFIRM_EXP_TIME))
+                .signWith(secretKey)
+                .compact();
+    }
+
 
     public String verifyConfirmToken(String token) {
         Jws<Claims> claims = this.getClaims(token);

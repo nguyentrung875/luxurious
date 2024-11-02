@@ -16,5 +16,6 @@ public interface EmailService {
     String sendConfirmBookingEmail(int idBooking) throws MessagingException;
     String sendSuccessfulBookingEmailToQueue(BookingDTO bookingDTO);
     String sendConfirmBookingEmailToQueue(AddBookingRequest bookingDTO);
-
+    String sendConfirmCreateUser(String toEmail) throws MessagingException;
+    String ReSendConfirmCreateUser(String toEmail) throws MessagingException;
 }

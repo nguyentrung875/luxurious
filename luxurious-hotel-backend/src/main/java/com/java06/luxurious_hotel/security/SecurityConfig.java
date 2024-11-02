@@ -46,7 +46,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
 
                         .requestMatchers("/authen/**").permitAll()
-
+                                .requestMatchers("/role/**").permitAll()
+                                .requestMatchers("/signup").permitAll()
+                                .requestMatchers("/signup/confirm").permitAll()
                                 .requestMatchers("/roomType/file/**").permitAll()// hình ảnh
                                 .requestMatchers("/file/**").permitAll()// hình ảnh
                                 .requestMatchers(HttpMethod.GET,"/room").permitAll()// search Avai Room

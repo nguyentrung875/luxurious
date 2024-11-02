@@ -66,6 +66,8 @@ public class RoleServiceImp implements RoleService {
                     if (employee.getImage() !=null && !employee.getImage().isEmpty()) {
                         String imageUrl = imageBaseUrl + user.getImage();
                         employee.setImage(imageUrl);
+                    }else {
+                        employee.setImage("http://localhost:9999/file/item.jpg.jpg");
                     }
                     employees.add(employee);
                 }

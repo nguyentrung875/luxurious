@@ -53,6 +53,9 @@ public class UserEntity {
     @Column(name = "deleted", columnDefinition = "TINYINT(1)")
     private Integer deleted;
 
+    @Column(name = "enabled",nullable = false)
+    private Boolean enabled;
+
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "id_role")

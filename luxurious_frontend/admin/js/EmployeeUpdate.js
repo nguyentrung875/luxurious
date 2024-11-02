@@ -1,12 +1,15 @@
 $(document).ready(function() {
     const urlParams = new URLSearchParams(window.location.search);
     const employeeId = urlParams.get('id');
-
+    var token = localStorage.getItem('jwt');
     // Lấy danh sách role từ API và đổ vào dropdown
     function loadRoles(selectedRoleId) {
         $.ajax({
             url: 'http://localhost:9999/role',  // API lấy danh sách các role
             method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + token   
+            },    
             success: function(response) {
                 if (response.statusCode === 200) {
                     let roles = response.data;
@@ -32,6 +35,9 @@ $(document).ready(function() {
         $.ajax({
             url: `http://localhost:9999/employee/${employeeId}`,  // API để lấy thông tin nhân viên
             method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + token   
+            },    
             success: function(response) {
                 if (response.statusCode === 200) {
                      employee = response.data;
