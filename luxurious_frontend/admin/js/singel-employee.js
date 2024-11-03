@@ -1,14 +1,19 @@
 var jwtToken = localStorage.getItem('jwt')
 
 $(document).ready(function() {
+
     // Lấy employeeId từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const employeeId = urlParams.get('id');
     if (employeeId) {
         // Gọi API để lấy thông tin của nhân viên
+        
         $.ajax({
             url: `http://localhost:9999/employee/${employeeId}`,  // API để lấy thông tin nhân viên
             method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + token   
+            },    
             success: function(response) {
                 if (response.statusCode === 200) {
                     let employee = response.data;

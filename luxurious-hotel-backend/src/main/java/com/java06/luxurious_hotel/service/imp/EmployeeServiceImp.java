@@ -79,6 +79,7 @@ public class EmployeeServiceImp implements EmployeeService {
         Employee.setSummary(addEmployeeRequest.summary());
         Employee.setPhone(addEmployeeRequest.phone());
         Employee.setDeleted(0);
+        Employee.setEnabled(true);
         Employee.setUsername(addEmployeeRequest.username());
         Employee.setPassword(passwordEncoder.encode(addEmployeeRequest.password()));
         RoleEntity Role = roleRepository.findRoleEntitiesById(addEmployeeRequest.Idrole());

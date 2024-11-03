@@ -68,8 +68,6 @@ public class EmailServiceImp implements EmailService {
     @Autowired
     private MailProperties mailProperties;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Override
     public String confirmResetPass(String token,String password) {

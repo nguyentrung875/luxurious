@@ -189,6 +189,7 @@
 //   });   
 
 $(document).ready(function () {
+    var token = localStorage.getItem('jwt');
     $('#userAdd').click(function (e) {
         e.preventDefault(); // Prevent form from submitting the traditional way
 
@@ -269,6 +270,9 @@ $(document).ready(function () {
                 data: formData,
                 contentType: false,
                 processData: false,
+                headers: {
+                    "Authorization": "Bearer " + token   
+                },        
                 success: function (response) {
                     // Check if the response is successful
                     if (response.status === 200 || response.statusCode === 200) {
