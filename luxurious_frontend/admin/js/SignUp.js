@@ -49,9 +49,9 @@ $(document).ready(function () {
                 processData: false,
                 success: function (response) {
                     if (response.status === 200 || response.statusCode === 200) {
-                        alert('Đăng ký thành công! vui lòng kiểm tra email để xác nhận tài khoản');
+                        alert('Registered successfully! Please check your email to confirm your account');
                     } else {
-                        alert('Đăng ký thất bại: ' + (response.message || 'Lỗi không xác định.'));
+                        alert('Registration failed: ' + (response.message || 'Lỗi không xác định.'));
                     }
                 },
                 error: function (xhr, status, error) {
