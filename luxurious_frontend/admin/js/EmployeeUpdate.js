@@ -60,6 +60,9 @@ $(document).ready(function() {
                     $.ajax({
                         url: 'http://localhost:9999/role',  // API để lấy danh sách các role
                         method: 'GET',
+                        headers: {
+                            "Authorization": "Bearer " + token   
+                        },                
                         success: function(roleResponse) {
                             if (roleResponse.statusCode === 200) {
                                 let roles = roleResponse.data;
@@ -171,6 +174,9 @@ $(document).ready(function() {
             processData: false,  // Ngăn jQuery xử lý dữ liệu
             contentType: false,  // Ngăn jQuery tự động thiết lập Content-Type
             data: formData,  // Gửi FormData bao gồm cả hình ảnh
+            headers: {
+                "Authorization": "Bearer " + token   
+            },    
             success: function(response) {
                 if (response.statusCode === 200) {
                     alert('Employee updated successfully');
