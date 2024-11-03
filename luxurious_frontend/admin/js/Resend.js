@@ -19,7 +19,7 @@ $(document).ready(function () {
             data: { email: email }, // Thêm email vào query parameters
             success: function (response) {
                 if (response.message) {
-                    alert('Email xác thực đã được gửi: ' + response.message);
+                    alert('Verification email has been sent: ' + response.message);
                 } else {
                     alert('Không thể gửi email: Lỗi không xác định.');
                 }
