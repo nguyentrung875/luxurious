@@ -87,7 +87,7 @@ public class EmailService {
                 "        <p style=\"font-size: 14px; color: #555555;\">If you have any questions, feel free to contact us at <a href=\"mailto:support@hotel.com\" style=\"color: #4CAF50; text-decoration: none;\">support@hotel.com</a>.</p>\n" +
                 "\n" +
                 "        <div style=\"text-align: center; margin-top: 20px;\">\n" +
-                "            <a href=\"http://127.0.0.1:5500/booking-history.html\" style=\"background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;\">Visit Our Website</a>\n" +
+                "            <a href=\"http://127.0.0.1:5501/booking-history.html\" style=\"background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;\">Visit Our Website</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "</body>\n" +
@@ -142,7 +142,7 @@ public class EmailService {
                 "\n" +
                 "        <!-- Additional Information -->\n" +
                 "        <p style=\"color: #333; font-size: 16px; margin-top: 20px;\">\n" +
-                "            <a href=\"http://127.0.0.1:5500/booking-history.html?conf="+confirmToken+"\">Please click here to confirm your booking!</a>\n" +
+                "            <a href=\"http://127.0.0.1:5501/booking-history.html?conf="+confirmToken+"\">Please click here to confirm your booking!</a>\n" +
                 "        </p>\n" +
                 "        <!-- Booking Details -->\n" +
                 "        <table style=\"width: 100%; border-collapse: collapse; margin-top: 20px;\">\n" +
