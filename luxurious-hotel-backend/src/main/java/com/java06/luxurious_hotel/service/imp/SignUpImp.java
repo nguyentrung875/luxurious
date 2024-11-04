@@ -36,7 +36,7 @@ public class SignUpImp implements SignUpService {
 
     @Override
     public void signUp(SignUpRequest signUpRequest) throws MessagingException {
-        RoleEntity guestRole = roleRepository.findByName("ROLE_GUEST");
+        RoleEntity staffRole = roleRepository.findByName("ROLE_STAFF");
         UserEntity user = new UserEntity();
         user.setEnabled(false);
         user.setUsername(signUpRequest.username());
@@ -45,7 +45,7 @@ public class SignUpImp implements SignUpService {
         user.setFirstName(signUpRequest.firstname());
         user.setLastName(signUpRequest.lastname());
         user.setPhone(signUpRequest.phone());
-        user.setRole(guestRole);
+        user.setRole(staffRole);
         userRepository.save(user);
         emailService.sendConfirmCreateUser(signUpRequest.email());
 
