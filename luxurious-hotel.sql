@@ -703,6 +703,8 @@ WHERE id IN (1, 2, 3, 4, 5);
 ALTER TABLE users 
 ADD COLUMN image TEXT;
 
+INSERT INTO  `roles` (name) VALUES ('ROLE_STAFF')
+
 
 ALTER TABLE users 
 ADD COLUMN enabled boolean;
