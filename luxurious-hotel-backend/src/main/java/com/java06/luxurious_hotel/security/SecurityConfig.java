@@ -56,12 +56,12 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET,"/roomType/detail/**").permitAll()// sear avai detail
                                 .requestMatchers(HttpMethod.GET,"/booking/p").permitAll()
                                 .requestMatchers("/email/**").permitAll()
-
+                                .requestMatchers("/status/**").permitAll()
 
 
                                 .requestMatchers("/roomType/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
                                 .requestMatchers("/booking/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
-                                .requestMatchers("/status/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
+//                                .requestMatchers("/status/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
 
                                 .requestMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers("/user/**").hasAuthority("ROLE_ADMIN")
