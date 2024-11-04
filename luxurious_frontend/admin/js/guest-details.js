@@ -1,5 +1,7 @@
+var token = localStorage.getItem('jwt');
+
+
 $(document).ready(function () {
-	var token = localStorage.getItem('jwt');
 
     // Lấy giá trị của tham số id từ URL
     var urlParams = new URLSearchParams(window.location.search);

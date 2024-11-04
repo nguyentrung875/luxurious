@@ -115,6 +115,7 @@ CREATE TABLE users(
 	image text,
 	id_role int DEFAULT 1, /*mặc định là ROLE_GUEST*/
 	deleted boolean DEFAULT FALSE,
+	enabled boolean,
 	
 	primary key(id)
 );
@@ -555,6 +556,21 @@ INSERT INTO users (username , password, first_name, last_name, dob, phone, email
 INSERT INTO users (username , password, first_name, last_name, dob, phone, email, address, summary, id_role) VALUES 
 ('user', '$2a$12$kXpBtvYgGvRtAkvXvgv3fugdX1oxyxXY7EfI4LveoSlqVPT5xUpWq', 'user', 'luxurious', '1990-01-01', '1234567891', 'user@gmail.com', 'user', '', 1);
 
+-- Thêm hình ảnh cho room_type
+UPDATE room_type
+SET image = CASE id
+    WHEN 1 THEN 'istockphoto-954121470-612x612.jpg,
+istockphoto-1066999762-612x612.jpg'
+    WHEN 2 THEN 'istockphoto-1066999762-612x612.jpg,
+istockphoto-1266155634-612x612.jpg'
+    WHEN 3 THEN 'istockphoto-1266155634-612x612.jpg,
+istockphoto-1318363878-612x612.jpg'
+    WHEN 4 THEN 'istockphoto-1318363878-612x612.jpg,
+istockphoto-1334117334-612x612.jpg'
+    WHEN 5 THEN 'istockphoto-1334117334-612x612.jpg,
+istockphoto-1370825295-612x612.jpg'
+END
+WHERE id IN (1, 2, 3, 4, 5);
 
 -- ---------------------------------------------------------------------------------------------------------------
 -- ---------------------------------------------------------------------------------------------------------------
@@ -688,7 +704,8 @@ ALTER TABLE users
 ADD COLUMN image TEXT;
 
 
-
+ALTER TABLE users 
+ADD COLUMN enabled boolean;
 
  
  
