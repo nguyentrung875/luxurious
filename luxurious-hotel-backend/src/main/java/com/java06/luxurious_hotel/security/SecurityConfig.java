@@ -54,9 +54,12 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET,"/room").permitAll()// search Avai Room
                                 .requestMatchers(HttpMethod.POST,"/room").permitAll()// search Avai Room
                                 .requestMatchers(HttpMethod.GET,"/roomType/detail/**").permitAll()// sear avai detail
-                                .requestMatchers(HttpMethod.GET,"/booking/p").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/booking/p**").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/booking").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/booking/confirm").permitAll()
                                 .requestMatchers("/email/**").permitAll()
                                 .requestMatchers("/status/**").permitAll()
+                                .requestMatchers("/user/p**").permitAll()
 
 
                                 .requestMatchers("/roomType/**").hasAnyAuthority("ROLE_ADMIN","ROLE_HOTEL_MANAGER")
