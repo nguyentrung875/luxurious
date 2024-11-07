@@ -216,7 +216,8 @@ INSERT INTO `roles` (name) VALUES
 ('ROLE_GUEST'),
 ('ROLE_ADMIN'),
 ('ROLE_HOTEL_MANAGER'),
-('ROLE_RES_MANAGER');
+('ROLE_RES_MANAGER'),
+('ROLE_STAFF');
 
 
 INSERT INTO bed_type (name)
@@ -571,6 +572,15 @@ istockphoto-1334117334-612x612.jpg'
 istockphoto-1370825295-612x612.jpg'
 END
 WHERE id IN (1, 2, 3, 4, 5);
+
+
+-- Lên lịch xóa logout token đã hết hạn
+CREATE EVENT IF NOT EXISTS delete_expired_token
+ON SCHEDULE EVERY 1 DAY
+STARTS NOW() 
+DO
+DELETE FROM invalid_token it 
+WHERE it.exp_time < NOW() ;
 
 -- ---------------------------------------------------------------------------------------------------------------
 -- ---------------------------------------------------------------------------------------------------------------

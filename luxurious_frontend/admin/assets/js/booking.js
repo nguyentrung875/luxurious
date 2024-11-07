@@ -358,8 +358,7 @@ function showBooking() {
                     </td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-outline-success"><i
-                                    class="ri-information-line"></i></button>
+                        
                             <button type="button"
                                 class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
                                 data-bs-toggle="dropdown" aria-haspopup="true"
