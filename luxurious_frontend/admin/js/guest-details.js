@@ -27,16 +27,16 @@ $(document).ready(function () {
 							<div class="lh-card">
 								<div class="lh-card-content card-default">
 									<div class="guest-profile">
-										<img src="${valueGuest.linkImage}" alt="profile">
+										<img src="${valueGuest.linkImage}" alt="profile" style="width: 200px; height: auto;">
 										<h5>${valueGuest.fullName}</h5>
 										<p>${valueGuest.id}</p>
 									</div>
-									<ul class="list">
-										<li><i class="ri-phone-line"></i><span>+91 9876543210</span></li>
-										<li><i class="ri-mail-line"></i><span>support@luxurious.com</span></li>
-										<li><i class="ri-map-pin-line"></i><span>47 Street view, Lorence park, Gujarat,
-												Bharat.</span></li>
-									</ul>
+								<!-- <ul class="list">
+									<li><i class="ri-phone-line"></i><span>+91 9876543210</span></li>
+									<li><i class="ri-mail-line"></i><span>support@luxurious.com</span></li>
+									<li><i class="ri-map-pin-line"></i><span>47 Street view, Lorence park, Gujarat,
+											Bharat.</span></li>
+								</ul> -->
 								</div>
 							</div>
 						</div>
