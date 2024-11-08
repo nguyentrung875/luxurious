@@ -24,7 +24,7 @@ $(document).ready(function () {
                 contentType: "application/x-www-form-urlencoded", // RequestParam
                 headers: {
                     "Authorization": "Bearer " + token   
-                },        
+                },
                 data: { idGuest: id },
                 success: function (response) {
                     if (response.data === true) {
