@@ -86,6 +86,7 @@ public class EmailServiceImp implements EmailService {
             String keyPassword = passwordEncoder.encode(password);
 
             System.out.println(user);
+
             System.out.println("keyPassword: " + password);
 
             userRepository.resetPassword(user.getId(),keyPassword);
@@ -117,7 +118,7 @@ public class EmailServiceImp implements EmailService {
                     + "Best regards,\n"
                     + "Luxurious Hotel team";
 
-            sendMailResetPassWord("hau.chuc95@gmail.com","olft ksqm henm txpe",email,subject,content);
+            sendMailResetPassWord(mailProperties.getUsername(),mailProperties.getPassword(),email,subject,content);
 
             return "Email sent, please check your inbox.";
 
@@ -128,15 +129,21 @@ public class EmailServiceImp implements EmailService {
 
     @Override
     public String keyConfirmResetPass(String email) {
+
+        // khởi tạo authorityDTO
         AuthorityDTO authorityDTO = new AuthorityDTO();
+
+        // tìm kiếm user thông qua email ( tới đây là trường hợp happy case )
         UserEntity userEntity = userRepository.findUserEntityByEmail(email);
 
+        // gán các giá trị để tạo key
         authorityDTO.setUsername(userEntity.getUsername());
         authorityDTO.setEmail(email);
         authorityDTO.setFirstName(userEntity.getFirstName());
         authorityDTO.setLastName(userEntity.getLastName());
         authorityDTO.setRole(String.valueOf(userEntity.getRole()));
 
+        // trả về key để xác nhận
         return jwtUtils.generateJwtTokenResetPassword(authorityDTO);
     }
 

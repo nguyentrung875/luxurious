@@ -62,6 +62,9 @@ $(document).ready(function () {
             
             $.ajax({
                 url: "http://localhost:9999/user/addguest",
+                headers: {
+                    "Authorization": "Bearer " + token  // Truyền token vào header
+                },
                 method: "POST",
                 data: formData,
                 processData: false, // Ngăn chặn jQuery xử lý dữ liệu (vì chúng ta đang sử dụng FormData)
