@@ -148,7 +148,8 @@
 							<div class="lh-right-tool lh-user-drop">
 								<div class="lh-hover-drop">
 									<div class="lh-hover-tool">
-										<img class="user" id="conmeo" src="assets/img/user/1.jpg"
+										<img class="user" id="conmeo"
+											src="/luxurious_frontend/assets/img/amenities/3.jpg"
 											alt="user">
 									</div>
 									<div class="lh-hover-drop-panel right">
@@ -162,8 +163,13 @@
 											<li><a href="#">Messages</a></li>
 											<li><a href="team-update.html">Settings</a></li>
 										</ul>
-										<ul class="border-top">
+										<!-- <ul class="border-top">
 											<li><a href="signin.html"><i
+														class="ri-logout-circle-r-line"></i>Logout</a></li>
+										</ul> -->
+
+										<ul class="border-top">
+											<li><a href="#" onclick="handleLogout()"><i
 														class="ri-logout-circle-r-line"></i>Logout</a></li>
 										</ul>
 									</div>
@@ -331,137 +337,137 @@
 				</div>
 			</div>
 
-				<!-- Notify sidebar -->
-				<div class="lh-notify-bar-overlay"></div>
-				<div class="lh-notify-bar">
-					<div class="lh-bar-title">
-						<h6>Notifications</h6>
-						<a href="javascript:void(0)" class="close-notify"><i
-								class="ri-close-line"></i></a>
-					</div>
-					<div class="lh-bar-content">
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
-							<li class="nav-item" role="presentation">
-								<button class="nav-link active" id="alert-tab" data-bs-toggle="tab"
-									data-bs-target="#alert"
-									type="button" role="tab" aria-controls="alert"
-									aria-selected="true">Alert</button>
-							</li>
-							<li class="nav-item" role="presentation">
-								<button class="nav-link" id="messages-tab" data-bs-toggle="tab"
-									data-bs-target="#messages"
-									type="button" role="tab" aria-controls="messages"
-									aria-selected="false">Messages</button>
-							</li>
-						</ul>
-						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade show active" id="alert" role="tabpanel"
-								aria-labelledby="alert-tab">
-								<div class="lh-alert-list">
-									<ul id="notification__content">
-	
-									</ul>
-									<ul>
-										<li class="check view__more"><a class="lh-primary-btn" href="#">View
-												more</a></li>
-	
-									</ul>
-	
-								</div>
+			<!-- Notify sidebar -->
+			<div class="lh-notify-bar-overlay"></div>
+			<div class="lh-notify-bar">
+				<div class="lh-bar-title">
+					<h6>Notifications</h6>
+					<a href="javascript:void(0)" class="close-notify"><i
+							class="ri-close-line"></i></a>
+				</div>
+				<div class="lh-bar-content">
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="alert-tab" data-bs-toggle="tab"
+								data-bs-target="#alert"
+								type="button" role="tab" aria-controls="alert"
+								aria-selected="true">Alert</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="messages-tab" data-bs-toggle="tab"
+								data-bs-target="#messages"
+								type="button" role="tab" aria-controls="messages"
+								aria-selected="false">Messages</button>
+						</li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="alert" role="tabpanel"
+							aria-labelledby="alert-tab">
+							<div class="lh-alert-list">
+								<ul id="notification__content">
+
+								</ul>
+								<ul>
+									<li class="check view__more"><a class="lh-primary-btn" href="#">View
+											more</a></li>
+
+								</ul>
+
 							</div>
-							<div class="tab-pane fade" id="messages" role="tabpanel"
-								aria-labelledby="messages-tab">
-								<div class="lh-message-list">
-									<ul>
-										<li>
-											<a href="#" class="reply">Reply</a>
-											<div class="user">
-												<img src="assets/img/user/9.jpg" alt="user">
-												<span class="label online"></span>
-											</div>
-											<div class="detail">
-												<a href="#" class="name">Boris Whisli</a>
-												<p class="time">5:30AM, Today</p>
-												<p class="message">Hello, Room 204 need to be clean.</p>
-												<span class="download-files">
-													<span class="download">
-														<img src="assets/img/room/1.png" alt="image">
-														<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
-													</span>
-													<span class="download">
-														<img src="assets/img/room/2.png" alt="image">
-														<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
-													</span>
-													<span class="download">
-														<img src="assets/img/room/3.png" alt="image">
-														<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
-													</span>
+						</div>
+						<div class="tab-pane fade" id="messages" role="tabpanel"
+							aria-labelledby="messages-tab">
+							<div class="lh-message-list">
+								<ul>
+									<li>
+										<a href="#" class="reply">Reply</a>
+										<div class="user">
+											<img src="assets/img/user/9.jpg" alt="user">
+											<span class="label online"></span>
+										</div>
+										<div class="detail">
+											<a href="#" class="name">Boris Whisli</a>
+											<p class="time">5:30AM, Today</p>
+											<p class="message">Hello, Room 204 need to be clean.</p>
+											<span class="download-files">
+												<span class="download">
+													<img src="assets/img/room/1.png" alt="image">
+													<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 												</span>
-											</div>
-										</li>
-										<li>
-											<a href="#" class="reply">Reply</a>
-											<div class="user">
-												<img src="assets/img/user/8.jpg" alt="user">
-												<span class="label offline"></span>
-											</div>
-											<div class="detail">
-												<a href="#" class="name">Frank N. Stein</a>
-												<p class="time">8:30PM, 05/12/2024</p>
-												<p class="message">Please take a look and get order from table
-													06.</p>
-											</div>
-										</li>
-										<li>
-											<a href="#" class="reply">Reply</a>
-											<div class="user">
-												<img src="assets/img/user/7.jpg" alt="user">
-												<span class="label busy"></span>
-											</div>
-											<div class="detail">
-												<a href="#" class="name">Frank N. Stein</a>
-												<p class="time">8:30PM, 05/12/2024</p>
-												<p class="message">Room 65 AC repair service is done.</p>
-												<span class="download-files">
-													<span class="download">
-														<img src="assets/img/facilities/1.png" alt="image">
-														<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
-													</span>
+												<span class="download">
+													<img src="assets/img/room/2.png" alt="image">
+													<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 												</span>
-											</div>
-										</li>
-										<li>
-											<a href="#" class="reply">Reply</a>
-											<div class="user">
-												<img src="assets/img/user/6.jpg" alt="user">
-												<span class="label busy"></span>
-											</div>
-											<div class="detail">
-												<a href="#" class="name">Paige Turner</a>
-												<p class="time">4:30PM, 12/12/2024</p>
-												<p class="message">Take a Spa trainer interview.</p>
-											</div>
-										</li>
-										<li>
-											<a href="#" class="reply">Reply</a>
-											<div class="user">
-												<img src="assets/img/user/5.jpg" alt="user">
-												<span class="label busy"></span>
-											</div>
-											<div class="detail">
-												<a href="#" class="name">Allie Grater</a>
-												<p class="time">8:30PM, 05/12/2024</p>
-												<p class="message">Take marketing module task.</p>
-											</div>
-										</li>
-										<li class="check"><a class="lh-primary-btn" href="#">View all</a></li>
-									</ul>
-								</div>
+												<span class="download">
+													<img src="assets/img/room/3.png" alt="image">
+													<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
+												</span>
+											</span>
+										</div>
+									</li>
+									<li>
+										<a href="#" class="reply">Reply</a>
+										<div class="user">
+											<img src="assets/img/user/8.jpg" alt="user">
+											<span class="label offline"></span>
+										</div>
+										<div class="detail">
+											<a href="#" class="name">Frank N. Stein</a>
+											<p class="time">8:30PM, 05/12/2024</p>
+											<p class="message">Please take a look and get order from table
+												06.</p>
+										</div>
+									</li>
+									<li>
+										<a href="#" class="reply">Reply</a>
+										<div class="user">
+											<img src="assets/img/user/7.jpg" alt="user">
+											<span class="label busy"></span>
+										</div>
+										<div class="detail">
+											<a href="#" class="name">Frank N. Stein</a>
+											<p class="time">8:30PM, 05/12/2024</p>
+											<p class="message">Room 65 AC repair service is done.</p>
+											<span class="download-files">
+												<span class="download">
+													<img src="assets/img/facilities/1.png" alt="image">
+													<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
+												</span>
+											</span>
+										</div>
+									</li>
+									<li>
+										<a href="#" class="reply">Reply</a>
+										<div class="user">
+											<img src="assets/img/user/6.jpg" alt="user">
+											<span class="label busy"></span>
+										</div>
+										<div class="detail">
+											<a href="#" class="name">Paige Turner</a>
+											<p class="time">4:30PM, 12/12/2024</p>
+											<p class="message">Take a Spa trainer interview.</p>
+										</div>
+									</li>
+									<li>
+										<a href="#" class="reply">Reply</a>
+										<div class="user">
+											<img src="assets/img/user/5.jpg" alt="user">
+											<span class="label busy"></span>
+										</div>
+										<div class="detail">
+											<a href="#" class="name">Allie Grater</a>
+											<p class="time">8:30PM, 05/12/2024</p>
+											<p class="message">Take marketing module task.</p>
+										</div>
+									</li>
+									<li class="check"><a class="lh-primary-btn" href="#">View all</a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+			</div>
+
 			<!-- main content -->
 			<div class="lh-main-content">
 				<div class="container-fluid">
@@ -1226,19 +1232,21 @@
 		<script src="assets/js/vendor/daterangepicker.js"></script>
 		<script src="assets/js/vendor/date-range.js"></script>
 
-	<!-- Main Custom -->
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/data/dashboard-chart-data.js"></script>
-    <script src="js/authorAdmin.js"></script>
-	<script src="assets/js/indexAdmin.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-	<script src="assets/js/notifications.js"></script>
-</body>
-
 		<!-- Main Custom -->
-<!-- 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/data/dashboard-chart-data.js"></script>
+		<script src="js/authorAdmin.js"></script>
+		<script src="assets/js/indexAdmin.js"></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+		<script src="assets/js/notifications.js"></script>
+	</body>
+
+	<!-- Main Custom -->
+	<!-- 		<script src="assets/js/main.js"></script>
 		<script src="assets/js/data/dashboard-chart-data.js"></script>
 		<script src="js/authorAdmin.js"></script>
 	</body> -->

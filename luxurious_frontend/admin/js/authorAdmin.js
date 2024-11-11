@@ -52,6 +52,11 @@ $(document).ready(function () {
          let userName = jwtJson.sub;         
         let userEmail = jwtJson.email;     
         let avatarUrl =  jwtJson.avatar;
+
+
+        if (avatarUrl === 'http://localhost:9999/file/') {
+            avatarUrl = '/luxurious_frontend/assets/img/logo/dribbble.png'; // Đường dẫn đến hình mặc định
+        }
  
          document.getElementById("userName").textContent = userName;
         document.getElementById("userEmail").textContent = userEmail;
@@ -80,6 +85,41 @@ $(document).ready(function () {
         // }
     }
 });
+
+
+
+function handleLogout() {
+    let token = localStorage.getItem('jwt');
+
+    if (token) {
+        $.ajax({
+            url: '/authen/logout',
+            type: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            success: function(response) {
+                // Xóa token khỏi localStorage
+                localStorage.removeItem('jwt');
+                alert('Logged Out!');
+                // Điều hướng đến trang đăng nhập hoặc trang chủ
+                window.location.href = 'signin.html';
+            },
+            // error: function(xhr, status, error) {
+            //     console.error('Error logging out:', error);
+            //     alert('Failed to log out. Please try again.');
+            // }
+        });
+    } else {
+        alert('No token found.');
+        window.location.href = 'signin.html';
+    }
+}
+
+
+
+
+
 
 function parseJwt(token) {
     var base64Url = token.split('.')[1];
