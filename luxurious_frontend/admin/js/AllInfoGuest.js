@@ -59,26 +59,6 @@ function getGuest(){
             $('#list-guests').html(html);
 			$('#guest_table').DataTable();
 
-
-			// // Khởi tạo DataTable
-			// $('#guest_table').DataTable({
-			// 	data: this.products, // Dữ liệu dùng để hiển thị cho bảng, có thể là array, object ...
-			// 	columns: [
-			// 		{ data: 'product_category.name' },
-			// 		{ data: 'name' },
-			// 		{ data: 'slug' },
-			// 		{ data: 'quantity' },
-			// 		{ data: 'price' },
-			// 	], // Các thuộc tính của product sẽ  match với từng collumn
-			// 	searching: false, // Mặc định là true, set false để tắt chức năng search
-			// 	ordering:  false, // Mặc định là true, set false để tắt chức năng sắp xếp theo collumn
-			// 	paging: false, // Mặc định là true, set false để tắt chức năng phân trang
-			// 	scrollX: 400, // Nội dụng của table sẽ hiện thị với with 400px, Nếu quá thì sẽ có thanh scroll
-			// 	scrollY: 400, // Nội dụng của table sẽ hiện thị với hieght 400px, Nếu quá thì sẽ có thanh scroll
-			// 	processing: true,
-			// 	info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries	
-			// });
-
         }
 
     })

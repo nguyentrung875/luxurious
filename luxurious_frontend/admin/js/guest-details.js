@@ -84,6 +84,10 @@ $(document).ready(function () {
 
             $('#guest-details').append(html)
             var html1 = ""
+
+			var dataTable = $('#booking_table').DataTable();
+			dataTable.destroy();
+
             for(i=0;i<item.data.length;i++){
                 
                 var response = item.data[i]
@@ -135,6 +139,25 @@ $(document).ready(function () {
 
             }
             $('#guest-booking').append(html1)
+
+			// Khởi tạo DataTable
+			$('#booking_table').DataTable({
+				// data: this.products, // Dữ liệu dùng để hiển thị cho bảng, có thể là array, object ...
+				// columns: [
+				// 	{ data: 'ID' },
+				// 	{ data: 'CheckIn' },
+				// 	{ data: 'slug' },
+				// 	{ data: 'quantity' },
+				// 	{ data: 'price' },
+				// ], // Các thuộc tính của product sẽ  match với từng collumn
+				// searching: false, // Mặc định là true, set false để tắt chức năng search
+				// ordering:  false, // Mặc định là true, set false để tắt chức năng sắp xếp theo collumn
+				// paging: false, // Mặc định là true, set false để tắt chức năng phân trang
+				// scrollX: 400, // Nội dụng của table sẽ hiện thị với with 400px, Nếu quá thì sẽ có thanh scroll
+				// scrollY: 400, // Nội dụng của table sẽ hiện thị với hieght 400px, Nếu quá thì sẽ có thanh scroll
+				// processing: true,
+				// info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries	
+			});
         }else{
             alert('Không thể tải dữ liệu người dùng.');
         }
