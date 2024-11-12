@@ -34,7 +34,7 @@ $(document).ready(function () {
                         setItemWithExpiry('redirectUrl', window.location.href,  60 * 1000);
                     }
             }else{
-                if(jwtJson.role !== "ROLE_ADMIN"&&jwtJson.role !== "ROLE_HOTEL_MANAGER"){
+                if(jwtJson.role !== "ROLE_ADMIN"&&jwtJson.role !== "ROLE_HOTEL_MANAGER"&&jwtJson.role !== "ROLE_STAFF"&&jwtJson.role !== "ROLE_GUEST"&&jwtJson.role !== "ROLE_HOTEL_MANAGER"&&jwtJson.role !== "ROLE_RES_MANAGER"){
                     alert("Bạn không có quyền truy cập trang hoặc thực hiện chức năng này.");
                     //localStorage.removeItem('jwt');  
         
@@ -52,6 +52,9 @@ $(document).ready(function () {
          let userName = jwtJson.sub;         
         let userEmail = jwtJson.email;     
         let avatarUrl =  jwtJson.avatar;
+        if (avatarUrl === 'http://localhost:9999/file/null'||avatarUrl === 'http://localhost:9999/file/') {
+            avatarUrl = '/luxurious_frontend/assets/img/logo/dribbble.png'; // Đường dẫn đến hình mặc định
+        }
  
          document.getElementById("userName").textContent = userName;
         document.getElementById("userEmail").textContent = userEmail;
@@ -81,6 +84,34 @@ $(document).ready(function () {
     }
 });
 
+function handleLogout() {
+    let token = localStorage.getItem('jwt');
+
+    if (token) {
+        $.ajax({
+            url: '/authen/logout',
+            type: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            success: function(response) {
+                // Xóa token khỏi localStorage
+                localStorage.removeItem('jwt');
+                alert('Logged Out!');
+                // Điều hướng đến trang đăng nhập hoặc trang chủ
+                window.location.href = 'signin.html';
+            },
+            // error: function(xhr, status, error) {
+            //     console.error('Error logging out:', error);
+            //     alert('Failed to log out. Please try again.');
+            // }
+        });
+    } else {
+        alert('No token found.');
+        window.location.href = 'signin.html';
+    }
+}
+
 function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -90,6 +121,7 @@ function parseJwt(token) {
 
     return JSON.parse(jsonPayload);
 }
+
 
 // Kiểm tra token có hết hạn hay chưa
 function isTokenExpired(token) {

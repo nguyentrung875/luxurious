@@ -180,6 +180,7 @@ public class RoomServiceImp implements com.java06.luxurious_hotel.service.RoomSe
             if (checkIn==true){
 
                 num = 1;
+                roomTypeMap.get(roomTypeName).setNumberAvailable(num);
                 checkIn = false;
             }
 
