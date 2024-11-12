@@ -408,7 +408,7 @@ function showCustomAlert() {
     var alertLink = document.getElementById('alertLink');
 
      alertMessage.textContent = 'Cannot delete this RoomType, Click this link to ';
-    alertLink.href = 'http://127.0.0.1:5501/luxurious_frontend/admin/room-list.html';  
+    alertLink.href = 'room-list.html';  
 
      alertBox.style.display = 'flex';
 
