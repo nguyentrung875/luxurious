@@ -158,10 +158,20 @@ function updateBooking(inputEditBooking) {
 function showDetailBooking(booking) {
 
     $('#input_first_name').val(booking.firstName);
+    $('#input_first_name').prop('disabled', true);
+
     $('#input_last_name').val(booking.lastName);
+    $('#input_last_name').prop('disabled', true);
+
     $('#input_phone').val(booking.phone);
+    $('#input_phone').prop('disabled', true);
+
     $('#input_email').val(booking.email);
+    $('#input_email').prop('disabled', true);
+
     $('#input_address').val(booking.address);
+    $('#input_address').prop('disabled', true);
+
     $('#input_checkin').val(booking.checkIn);
     $('#input_checkout').val(booking.checkOut);
     $('#input_adult').val(booking.adultNo);
@@ -192,6 +202,8 @@ function showDetailBooking(booking) {
 
 function clearAll() {
     $('input').val('');
+    $('input').prop('disabled', false);
+    $('textarea').prop('disabled', false);
     $('textarea').val('');
     $('#booking_details').attr('idBooking', '')
     $('#input_rooms').val('');
@@ -346,8 +358,7 @@ function showBooking() {
                     </td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-outline-success"><i
-                                    class="ri-information-line"></i></button>
+                        
                             <button type="button"
                                 class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
                                 data-bs-toggle="dropdown" aria-haspopup="true"

@@ -52,13 +52,20 @@ $(document).ready(function () {
          let userName = jwtJson.sub;         
         let userEmail = jwtJson.email;     
         let avatarUrl =  jwtJson.avatar;
+
         if (avatarUrl === 'http://localhost:9999/file/null'||avatarUrl === 'http://localhost:9999/file/') {
             avatarUrl = '/luxurious_frontend/assets/img/logo/dribbble.png'; // Đường dẫn đến hình mặc định
         }
  
+
+       
          document.getElementById("userName").textContent = userName;
         document.getElementById("userEmail").textContent = userEmail;
-        document.getElementById("conmeo").src = avatarUrl;
+        if (avatarUrl.slice(-4) != 'null') {
+            document.getElementById("conmeo").src = avatarUrl;
+        } else {
+            document.getElementById("conmeo").src = 'assets/img/user/thumb.jpg';
+        }
         //document.querySelector('.user').setAttribute('src', avatarUrl);
         }
 

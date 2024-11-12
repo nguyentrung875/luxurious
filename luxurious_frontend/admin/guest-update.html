@@ -246,6 +246,27 @@
 											class="hover-title">Invoice</span> </span>
 								</a>
 							</li>
+
+														
+							<!-- ROOM MANAGER MENU-->
+							<li class="lh-sb-item-separator"></li>
+							<li class="lh-sb-title condense">Rooms</li>
+							<li class="lh-sb-item">
+								<a href="room-list.html" class="lh-page-link">
+									<i class="ri-group-line"></i><span class="condense"><span
+											class="hover-title">Room List</span> </span>
+								</a>
+							</li>
+							<li class="lh-sb-item">
+								<a href="room_type_mana.html" class="lh-page-link">
+									<i class="ri-user-search-line"></i><span class="condense"><span
+											class="hover-title">Room Types
+											</span> </span>
+								</a>
+							</li>
+							<!-- END ROOM MANAGER MENU -->
+
+
 							<li class="lh-sb-item-separator"></li>
 							<li class="lh-sb-title condense">Restaurant</li>
 							<li class="lh-sb-item">
@@ -468,10 +489,10 @@
 					<!-- Page title & breadcrumb -->
 					<div class="lh-page-title lh-page-title-2">
 						<div class="lh-breadcrumb">
-							<h5>Add Members</h5>
+							<h5>Update Members</h5>
 							<ul>
 								<li><a href="index.html">Luxurious</a></li>
-								<li>Team Add</li>
+								<li>Members Update</li>
 							</ul>
 						</div>
 					</div>
@@ -487,21 +508,21 @@
 														<div class="profile-img">
 															<div class="avatar-preview">
 																<div class="t-img" id="imagePreview"
-																	style="background-image: url(assets/img/user/thumb.jpg);">
+																	style="background-image: url('http://localhost:9999/file/hauchuc/client.PNG');">
 																</div>
 															</div>
 															<span class="tag-label online"></span>
-															<div class="avatar-edit">
+															<!-- <div class="avatar-edit">
 																<input type='file' id="imageUpload"
 																	accept=".png, .jpg, .jpeg">
 																<label for="imageUpload"></label>
-															</div>
+															</div> -->
 														</div>
 													</div>
-													<div class="form-group">
+													<!-- <div class="form-group">
 														<textarea class="form-control" id="profile_detail" rows="9"
 															placeholder="Enter Details"></textarea>
-													</div>
+													</div> -->
 												</div>
 											</div>
 										</div>
@@ -515,11 +536,7 @@
 											<div class="col-sm-12">
 												<h3>Guest Update</h3>
 												<div class="lh-team-detail">
-													<p>From your account you can easily view and track Deals. You can
-														manage
-														and change your account information like address, contact
-														information
-														and history of deals.</p>
+													<p>Edit Customer Information.</p>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
@@ -541,7 +558,7 @@
 													<h6>Date Of Birth</h6>
 													<ul>
 														<li>
-															<input id="dob" type="text" class="form-control"
+															<input id="dob" type="date" class="form-control"
 																placeholder="Enter DOB" maxlength="10">
 														</li>
 													</ul>
@@ -598,7 +615,9 @@
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
-												<button id="guest-update-btn">Update</button>
+												<div class="lh-team-detail">
+													<button class="btn btn-primary" id="guest-update-btn">Update</button>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -763,7 +782,7 @@
 	<!-- <script src="js/guest-add.js"></script> -->
 	<!-- <script src="js/get-value-guest.js"></script> -->
 	<script src="js/guest-update.js"></script>
-  		<script src="js/authorAdmin.js"></script>
+  	<script src="js/authorAdmin.js"></script>
 
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>

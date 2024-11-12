@@ -252,6 +252,27 @@
 											class="hover-title">Invoice</span> </span>
 								</a>
 							</li>
+
+														
+							<!-- ROOM MANAGER MENU-->
+							<li class="lh-sb-item-separator"></li>
+							<li class="lh-sb-title condense">Rooms</li>
+							<li class="lh-sb-item">
+								<a href="room-list.html" class="lh-page-link">
+									<i class="ri-group-line"></i><span class="condense"><span
+											class="hover-title">Room List</span> </span>
+								</a>
+							</li>
+							<li class="lh-sb-item">
+								<a href="room_type_mana.html" class="lh-page-link">
+									<i class="ri-user-search-line"></i><span class="condense"><span
+											class="hover-title">Room Types
+											</span> </span>
+								</a>
+							</li>
+							<!-- END ROOM MANAGER MENU -->
+
+
 							<li class="lh-sb-item-separator"></li>
 							<li class="lh-sb-title condense">Restaurant</li>
 							<li class="lh-sb-item">
@@ -483,7 +504,7 @@
 							<a href="javascript:void(0)" title="Refresh" class="refresh"><i
 									class="ri-refresh-line"></i></a>
 							<div id="pagedate">
-								<div class="lh-date-range" title="Date">
+								<div id="dateRange" class="lh-date-range" title="Date">
 									<span></span>
 								</div>
 							</div>
@@ -510,14 +531,14 @@
 									<div class="title">
 										<div class="growth-numbers">
 											<h4>Visitor</h4>
-											<h5>698k</h5>
+											<h5 id="dashboard_visitor">698k</h5>
 										</div>
 										<span class="icon"><i class="ri-shield-user-line"></i></span>
 									</div>
-									<p class="card-groth up">
+									<p id="dashboard_visitor_growth" class="card-groth up">
 										<i class="ri-arrow-up-line"></i>
-										25%
-										<span>Last Month</span>
+										<b>25%</b>
+										<span>previous cycle</span>
 									</p>
 									<div class="mini-chart">
 										<div id="userNumbers"></div>
@@ -531,13 +552,14 @@
 									<div class="title">
 										<div class="growth-numbers">
 											<h4>Bookings</h4>
-											<h5>10.63k</h5>
+											<h5 id="dashboard_booking">10.63k</h5>
 										</div>
 										<span class="icon"><i class="ri-shopping-bag-3-line"></i>
 										</span>
 									</div>
 									<p class="card-groth down">
 										<i class="ri-arrow-down-line"></i>
+										<span id="dashboard_booking_growth"></span>
 										.5%
 										<span>Last Month</span>
 									</p>
@@ -1233,8 +1255,8 @@
 	<!-- Main Custom -->
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/data/dashboard-chart-data.js"></script>
-      		<script src="js/authorAdmin.js"></script>
-
+    <script src="js/authorAdmin.js"></script>
+	<script src="assets/js/indexAdmin.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
