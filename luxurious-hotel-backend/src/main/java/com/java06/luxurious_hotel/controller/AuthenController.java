@@ -29,6 +29,7 @@ public class AuthenController {
     }
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestHeader(HttpHeaders.AUTHORIZATION) String request){
+        System.out.println("token logged out" + request);
         BaseResponse baseResponse = new BaseResponse();
         authenService.logout(request);
         baseResponse.setMessage("Logged Out!");

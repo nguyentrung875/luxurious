@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -71,9 +72,10 @@ public class AuthenServiceImp implements AuthenService {
         Jws<Claims> claims = jwtUtils.getClaims(token);
         InvalidTokenEntity invalidTokenEntity = new InvalidTokenEntity();
         invalidTokenEntity.setToken(token);
-        invalidTokenEntity.setExpTime(claims.getPayload().getExpiration().toInstant()
-                .atZone(ZoneId.of("UTC"))
-                .toLocalDateTime());
+//        invalidTokenEntity.setExpTime(claims.getPayload().getExpiration().toInstant()
+//                .atZone(ZoneId.of("UTC"))
+//                .toLocalDateTime());
+        invalidTokenEntity.setExpTime(LocalDateTime.now());
 
         invalidTokenRepository.save(invalidTokenEntity);
 
