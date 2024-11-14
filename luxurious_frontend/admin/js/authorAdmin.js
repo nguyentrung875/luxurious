@@ -52,9 +52,12 @@ $(document).ready(function () {
          let userName = jwtJson.sub;         
         let userEmail = jwtJson.email;     
         let avatarUrl =  jwtJson.avatar;
+        
+        console.log(avatarUrl);
+        
 
         if (avatarUrl === 'http://localhost:9999/file/null'||avatarUrl === 'http://localhost:9999/file/') {
-            avatarUrl = '/luxurious_frontend/assets/img/logo/dribbble.png'; // Đường dẫn đến hình mặc định
+            avatarUrl = 'assets/img/user/thumb.jpg'; // Đường dẫn đến hình mặc định
         }
  
 

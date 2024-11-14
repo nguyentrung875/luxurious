@@ -1,28 +1,30 @@
 $(document).ready(function () {
     let roomData = JSON.parse(localStorage.getItem('roomData'));
-    let savedTotalRoom = localStorage.getItem('totalRoom'); 
-    let savedTotalAvaiRoom = localStorage.getItem('totalAvaiRoom'); 
-
-   // if(savedTotalRoom> savedTotalAvaiRoom) {
-       
-   // }
+    let savedTotalRoom = localStorage.getItem('totalRoom');
+    let savedTotalAvaiRoom = localStorage.getItem('totalAvaiRoom');
 
 
-   var savedTotalRoom1 = Number(savedTotalRoom);
-var savedTotalAvaiRoom1 = Number(savedTotalAvaiRoom);
 
-if (savedTotalRoom1 > savedTotalAvaiRoom1) {
-   //$('#AvaiRoomMess').text('Số phòng hiện tại không đủ').show();
-   //alert('Số phòng hiện tại không đủ')
-   Swal.fire({
-       icon: 'error',
-       title: 'Oops...',
-       text: 'Số phòng hiện tại không đủ!',
-       footer: '<a href="">Bạn cần hỗ trợ thêm?</a>'
-   });
-} else {
-   //$('#AvaiRoomMess').hide();
-}
+    // if(savedTotalRoom> savedTotalAvaiRoom) {
+
+    // }
+
+
+    var savedTotalRoom1 = Number(savedTotalRoom);
+    var savedTotalAvaiRoom1 = Number(savedTotalAvaiRoom);
+
+    if (savedTotalRoom1 > savedTotalAvaiRoom1) {
+        //$('#AvaiRoomMess').text('Số phòng hiện tại không đủ').show();
+        //alert('Số phòng hiện tại không đủ')
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Số phòng hiện tại không đủ!',
+            footer: '<a href="">Bạn cần hỗ trợ thêm?</a>'
+        });
+    } else {
+        //$('#AvaiRoomMess').hide();
+    }
 
     console.log(roomData);
 
@@ -58,35 +60,40 @@ if (savedTotalRoom1 > savedTotalAvaiRoom1) {
            </div>
        `;
         roomsContainer.append(roomCard);
-   });
+    });
 
 
 
-   $('.view-more-btn').on('click', function (e) {
-       e.preventDefault();  
+    $('.view-more-btn').on('click', function (e) {
+        e.preventDefault();
 
-       //localStorage.removeItem('roomData');  
-   
+        //TRUNG CODE - lấy dữ liệu từ url
+        let searchParams = new URLSearchParams(window.location.search);
+        var checkinDate = searchParams.get('in')
+        var checkoutDate = searchParams.get('out')
+        var adultNumber = searchParams.get('adult')
+        var childrenNumber = searchParams.get('children')
+
+
+        //localStorage.removeItem('roomData');  
+
         let roomTypeId = $(this).attr('data-room-id');
 
-   
-console.log(roomTypeId)
-
         $.ajax({
-           url: `http://localhost:9999/roomType/detail/${roomTypeId}`,   
-           type: 'GET',
-           success: function (response) {
+            url: `http://localhost:9999/roomType/detail/${roomTypeId}`,
+            type: 'GET',
+            success: function (response) {
                 console.log('Room details:', response);
-   
+
                 localStorage.setItem('roomDetails', JSON.stringify(response));
-   
-                window.location.href = 'room-details.html';
-           },
-           error: function (xhr, status, error) {
-               
-               alert('Failed to retrieve room details. Please try again.');
-           }
-});
-});
+                    
+                window.location.href = `room-details.html?in=${checkinDate}&out=${checkoutDate}&adult=${adultNumber}&children=${childrenNumber}`;
+            },
+            error: function (xhr, status, error) {
+
+                alert('Failed to retrieve room details. Please try again.');
+            }
+        });
+    });
 
 });
