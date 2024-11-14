@@ -45,15 +45,15 @@ cd luxurious
 ```bash
 docker compose up -d
 ```
-3. Run mysql script
+3. Check the running status of containers
 ```bash
-luxurious-hotel.sql
+docker compose ps
 ```
 4. Run the backend server
 ```bash
 http://localhost:9999
 ```
-5. Run the frontend application with Live server (VSCode IDE)
+5. Run the "luxurious_frontend" application with Live server (VSCode IDE)
 ```bash
 http://localhost:5500
 ```
