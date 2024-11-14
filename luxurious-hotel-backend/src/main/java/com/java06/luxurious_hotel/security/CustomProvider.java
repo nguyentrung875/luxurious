@@ -37,14 +37,17 @@ public class CustomProvider implements AuthenticationProvider {
         UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(()-> new UserNotFoundException());
 
-//        if (userEntity.getDeleted() == 1) {
-//
-//        }
 
         //Kiểm tra tài khoản đã kích hoạt hay chưa
-        if (!userEntity.getEnabled()){
+        if (!Boolean.TRUE.equals(userEntity.getEnabled())) {
             throw new UserNotActivatedException();
         }
+
+
+        //Kiểm tra tài khoản đã kích hoạt hay chưa
+//        if (userEntity.getEnabled() == null || !userEntity.getEnabled()){
+//            throw new UserNotActivatedException();
+//        }
 
         //Kiểm tra mật khẩu đúng hay chưa
         if (!passwordEncoder.matches(password, userEntity.getPassword())){
