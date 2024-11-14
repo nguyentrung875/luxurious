@@ -8,6 +8,7 @@ import com.java06.luxurious_hotel.exception.room.RoomNotFoundException;
 import com.java06.luxurious_hotel.exception.roomType.AmentityNotFoundException;
 import com.java06.luxurious_hotel.exception.roomType.RoomTypeNotFoundException;
 import com.java06.luxurious_hotel.exception.user.IncorrectPasswordException;
+import com.java06.luxurious_hotel.exception.user.UserNotActivatedException;
 import com.java06.luxurious_hotel.exception.user.UserNotFoundException;
 import com.java06.luxurious_hotel.response.BaseResponse;
 import io.jsonwebtoken.JwtException;
@@ -150,6 +151,14 @@ public class GlobalException {
 
     @ExceptionHandler(IncorrectPasswordException.class)
     public ResponseEntity<?> handleIncorrectPasswordException(IncorrectPasswordException e) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setStatusCode(200);
+        baseResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(UserNotActivatedException.class)
+    public ResponseEntity<?> handleUserNotActivatedException(UserNotActivatedException e) {
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatusCode(200);
         baseResponse.setMessage(e.getMessage());

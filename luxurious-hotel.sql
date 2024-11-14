@@ -548,14 +548,19 @@ INSERT INTO food_menu (id_menu, id_food) VALUES
 (5, 44), -- Sparkling Water
 (5, 45); -- Cocktail
 
+-- Thêm tài khoản mặc định
 
--- username: admin | password: admin
-INSERT INTO users (username , password, first_name, last_name, dob, phone, email, address, summary, id_role) VALUES 
-('admin', '$2a$12$bsO6yLnL4.7nsn9DOvLqqeY6oolhWIrpFEwKHzvGnywyT/rZWNJim', 'admin', 'luxurious', '1990-01-01', '1234567890', 'admin@gmail.com', 'admin', '', 2);
+-- username: admin | password: admin | role: admin
+INSERT INTO users (username , password, first_name, last_name, dob, phone, email, address, summary, id_role, enabled) VALUES 
+('admin', '$2a$12$bsO6yLnL4.7nsn9DOvLqqeY6oolhWIrpFEwKHzvGnywyT/rZWNJim', 'admin', 'luxurious', '1990-01-01', '1234567890', 'admin@gmail.com', 'admin', '', 2, 1);
 
--- username: user | password: user
-INSERT INTO users (username , password, first_name, last_name, dob, phone, email, address, summary, id_role) VALUES 
-('user', '$2a$12$kXpBtvYgGvRtAkvXvgv3fugdX1oxyxXY7EfI4LveoSlqVPT5xUpWq', 'user', 'luxurious', '1990-01-01', '1234567891', 'user@gmail.com', 'user', '', 1);
+-- username: user | password: user | role: staff
+INSERT INTO users (username , password, first_name, last_name, dob, phone, email, address, summary, id_role, enabled) VALUES 
+('user', '$2a$12$kXpBtvYgGvRtAkvXvgv3fugdX1oxyxXY7EfI4LveoSlqVPT5xUpWq', 'user', 'luxurious', '1990-01-01', '1234567891', 'user@gmail.com', 'user', '', 5, 1);
+
+-- username: manager | password: manager | role: manager
+INSERT INTO users (username , password, first_name, last_name, dob, phone, email, address, summary, id_role, enabled) VALUES 
+('manager', '$2a$12$Kw/0tHTGEHgqpynnwgt3w.HdLOMb8xbUKh5ZRrVvPaaAZhwwMu1sO', 'manager', 'luxurious', '1990-01-01', '1234567892', 'manager@gmail.com', 'manager', '', 5, 1);
 
 -- Thêm hình ảnh cho room_type
 UPDATE room_type
@@ -575,6 +580,8 @@ WHERE id IN (1, 2, 3, 4, 5);
 
 
 -- Lên lịch xóa logout token đã hết hạn
+SET GLOBAL event_scheduler = ON;
+
 CREATE EVENT IF NOT EXISTS delete_expired_token
 ON SCHEDULE EVERY 1 DAY
 STARTS NOW() 

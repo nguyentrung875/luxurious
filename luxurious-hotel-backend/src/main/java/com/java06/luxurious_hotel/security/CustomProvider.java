@@ -3,6 +3,7 @@ package com.java06.luxurious_hotel.security;
 import com.java06.luxurious_hotel.dto.AuthorityDTO;
 import com.java06.luxurious_hotel.entity.UserEntity;
 import com.java06.luxurious_hotel.exception.user.IncorrectPasswordException;
+import com.java06.luxurious_hotel.exception.user.UserNotActivatedException;
 import com.java06.luxurious_hotel.exception.user.UserNotFoundException;
 import com.java06.luxurious_hotel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,16 @@ public class CustomProvider implements AuthenticationProvider {
         UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(()-> new UserNotFoundException());
 
+//        if (userEntity.getDeleted() == 1) {
+//
+//        }
+
+        //Kiểm tra tài khoản đã kích hoạt hay chưa
+        if (!userEntity.getEnabled()){
+            throw new UserNotActivatedException();
+        }
+
+        //Kiểm tra mật khẩu đúng hay chưa
         if (!passwordEncoder.matches(password, userEntity.getPassword())){
             throw new IncorrectPasswordException();
         }
