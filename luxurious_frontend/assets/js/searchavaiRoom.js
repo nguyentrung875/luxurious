@@ -64,7 +64,7 @@ $(document).ready(function () {
                 localStorage.setItem('children', children)
 
                 // Redirect the user to the room-2.html page
-                window.location.href = 'room-2.html';
+                window.location.href = `room-2.html?in=${formattedCheckIn}&out=${formattedCheckOut}&adult=${adults}&children=${children}`;
             },
             error: function (error) {
                 if (error.responseJSON && error.responseJSON.message.includes("Check-in date must be before")) {

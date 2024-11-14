@@ -21,13 +21,20 @@ $(document).ready(function () {
         if(item.data && item.data.length > 0){
             var firstBooking = item.data[0]
             var valueGuest = firstBooking.guestDTO;
+			
 
+			var imageLink = valueGuest.linkImage
+			
+			if (valueGuest.linkImage == 'http://localhost:9999/file/hauchuc/null') {
+				imageLink = 'assets/img/user/thumb.jpg'; // Đường dẫn đến hình mặc định
+			}
+		
             var html = `<div class="col-xxl-3 col-xl-4 col-md-12">
 						<div class="lh-card-sticky guest-card">
 							<div class="lh-card">
 								<div class="lh-card-content card-default">
 									<div class="guest-profile">
-										<img src="${valueGuest.linkImage}" alt="profile" style="width: 200px; height: auto;">
+										<img src="${imageLink}" alt="profile" style="width: 200px; height: auto;">
 										<h5>${valueGuest.fullName}</h5>
 										<p>${valueGuest.id}</p>
 									</div>
