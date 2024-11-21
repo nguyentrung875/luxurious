@@ -11,6 +11,7 @@ import com.java06.luxurious_hotel.enumContraints.NotificationType;
 import com.java06.luxurious_hotel.exception.booking.BookingNotFoundException;
 import com.java06.luxurious_hotel.exception.room.RoomNotAvailableException;
 import com.java06.luxurious_hotel.exception.room.RoomNotFoundException;
+import com.java06.luxurious_hotel.exception.user.UserNotFoundException;
 import com.java06.luxurious_hotel.repository.BookingRepository;
 import com.java06.luxurious_hotel.repository.RoomBookingRepository;
 import com.java06.luxurious_hotel.repository.RoomRepository;
@@ -104,6 +105,9 @@ public class BookingServiceImp implements BookingService {
         var optional = userRepository.findUserEntityByPhone(request.phone());
         if (optional.isPresent()) {
             userEntity = optional.get();
+            if (userEntity.getDeleted() == 1){
+                throw new UserNotFoundException();
+            }
         }
 
         //Cập nhật lại thông tin guest
@@ -112,6 +116,7 @@ public class BookingServiceImp implements BookingService {
         userEntity.setPhone(request.phone());
         userEntity.setEmail(request.email());
         userEntity.setAddress(request.address());
+        userEntity.setDeleted(0);
         RoleEntity role = new RoleEntity();
         role.setId(1);
         userEntity.setRole(role);
