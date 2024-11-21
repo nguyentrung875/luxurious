@@ -3,7 +3,7 @@
 FROM maven:3.9.4-eclipse-temurin-21 AS build
 
 # Set the working directory inside the container
-WORKDIR /luxurious-app
+WORKDIR /luxurious
 
 # Copy the Maven project files
 COPY pom.xml .
@@ -21,13 +21,16 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre
 
 # Set the working directory
-WORKDIR /luxurious-app
+WORKDIR /luxurious
 
 # Copy the built jar from the build stage
-COPY --from=build /app/target/*.jar luxurious.jar
+COPY --from=build /luxurious/target/*.jar luxurious.jar
+
+# Sao chép thư mục uploads vào container
+COPY uploads /luxurious/uploads
 
 # Expose the port on which the app runs
 EXPOSE 9999
 
 # Define the command to run the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "luxurious.jar"]
