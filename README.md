@@ -55,5 +55,5 @@ http://localhost:9999
 ```
 5. Run the "luxurious_frontend" application with Live server (VSCode IDE)
 ```bash
-http://localhost:5500
+http://localhost:5501
 ```
