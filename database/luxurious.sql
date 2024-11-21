@@ -185,8 +185,8 @@ CREATE TABLE invalid_token(
 
 CREATE TABLE notification(
 	id int auto_increment,
-	title varchar(20),
-	message varchar(100),
+	title varchar(100),
+	message varchar(255),
 	noti_type varchar(100),
 	create_time timestamp,
 	unread boolean,
