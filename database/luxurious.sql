@@ -560,7 +560,7 @@ INSERT INTO users (username , password, first_name, last_name, dob, phone, email
 
 -- username: manager | password: manager | role: manager
 INSERT INTO users (username , password, first_name, last_name, dob, phone, email, address, summary, id_role, enabled) VALUES 
-('manager', '$2a$12$Kw/0tHTGEHgqpynnwgt3w.HdLOMb8xbUKh5ZRrVvPaaAZhwwMu1sO', 'manager', 'luxurious', '1990-01-01', '1234567892', 'manager@gmail.com', 'manager', '', 5, 1);
+('manager', '$2a$12$Kw/0tHTGEHgqpynnwgt3w.HdLOMb8xbUKh5ZRrVvPaaAZhwwMu1sO', 'manager', 'luxurious', '1990-01-01', '1234567892', 'manager@gmail.com', 'manager', '', 3, 1);
 
 -- Thêm hình ảnh cho room_type
 UPDATE room_type

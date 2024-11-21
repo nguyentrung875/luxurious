@@ -44,7 +44,7 @@ public class StatusServiceImp implements StatusService {
 
         //Nếu dữ liệu có trong redis
         if (redisTemplate.hasKey("statusDTO")){
-            System.out.println("Có redis");
+//            System.out.println("Có redis");
             var json = redisTemplate.opsForValue().get("statusDTO").toString();
             try {
                 statusDTO = objectMapper.readValue(json, StatusDTO.class);
@@ -53,7 +53,7 @@ public class StatusServiceImp implements StatusService {
             }
             return statusDTO;
         }
-        System.out.println("Không redis");
+//        System.out.println("Không redis");
 
 
         statusDTO.setListBookingStatus(bookingStatusRepository.findAll().stream().map(bookingStatus ->
